@@ -45,10 +45,8 @@ class ArchetypeAssessment {
         this.formData[field] = value;
         const wasShowingError = this.showError;
         this.showError = false;
-        // Only re-render if we need to hide the error message
-        if (wasShowingError) {
-            this.render();
-        }
+        // Re-render to update the UI (show selection and enable/disable buttons)
+        this.render();
     }
 
     handleStartAssessment() {
@@ -70,6 +68,66 @@ class ArchetypeAssessment {
             this.showResults = true;
             this.render();
             this.startScoreAnimation();
+            this.sendResultsToN8n();
+        }
+    }
+
+    async sendResultsToN8n() {
+        const scores = calculateScores(this.formData);
+        const dominants = getDominantArchetype(scores);
+        const archetypeKey = getArchetypeKey(dominants);
+        const archetypeInfo = ARCHETYPE_DESCRIPTIONS[archetypeKey] || ARCHETYPE_DESCRIPTIONS[dominants[0]];
+
+        const payload = {
+            timestamp: new Date().toISOString(),
+            userInfo: {
+                name: this.formData.name,
+                organization: this.formData.organization,
+                role: this.formData.role
+            },
+            responses: {
+                timeline: this.formData.timeline,
+                decisionMaking: this.formData.decisionMaking,
+                innovation: this.formData.innovation,
+                partnership: this.formData.partnership,
+                budget: this.formData.budget,
+                creative: this.formData.creative,
+                communication: this.formData.communication,
+                competitive: this.formData.competitive,
+                agencyIdeas: this.formData.agencyIdeas,
+                pastLessons: this.formData.pastLessons,
+                additional: this.formData.additional
+            },
+            scores: {
+                architect: Math.round(scores.architect * 100),
+                visionary: Math.round(scores.visionary * 100),
+                accelerator: Math.round(scores.accelerator * 100),
+                entrepreneur: Math.round(scores.entrepreneur * 100)
+            },
+            result: {
+                dominantArchetypes: dominants,
+                archetypeKey: archetypeKey,
+                title: archetypeInfo.title,
+                description: archetypeInfo.description
+            }
+        };
+
+        try {
+            const response = await fetch('https://antennagroup.app.n8n.cloud/webhook-test/f72055be-200b-439d-91cd-150df843b74f', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload)
+            });
+
+            if (response.ok) {
+                console.log('Results successfully sent to n8n:', payload);
+            } else {
+                console.error('Failed to send results to n8n:', response.status, response.statusText);
+            }
+        } catch (error) {
+            console.error('Error sending results to n8n:', error);
         }
     }
 
