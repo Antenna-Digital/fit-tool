@@ -35,10 +35,19 @@ class ArchetypeAssessment {
             email: ''
         };
         this.animationTimer = null;
+        this.loadedFromUrl = false;
     }
 
     init() {
+        // Check if there are results in the URL
+        if (this.loadResultsFromUrl()) {
+            this.showResults = true;
+            this.loadedFromUrl = true;
+        }
         this.render();
+        if (this.showResults) {
+            this.startScoreAnimation();
+        }
     }
 
     handleInputChange(field, value) {
@@ -68,7 +77,8 @@ class ArchetypeAssessment {
             this.showResults = true;
             this.render();
             this.startScoreAnimation();
-            this.sendResultsToN8n();
+            this.saveResultsToUrl();
+            // Don't send to n8n yet - wait for contact form submission
         }
     }
 
@@ -83,7 +93,8 @@ class ArchetypeAssessment {
             userInfo: {
                 name: this.formData.name,
                 organization: this.formData.organization,
-                role: this.formData.role
+                role: this.formData.role,
+                email: this.contactData.email || ''
             },
             responses: {
                 timeline: this.formData.timeline,
@@ -148,6 +159,10 @@ class ArchetypeAssessment {
     handleContactSubmit() {
         if (this.contactData.name && this.contactData.organization && this.contactData.email) {
             console.log('Contact form submitted:', this.contactData);
+            
+            // Send contact data to n8n
+            this.sendContactToN8n();
+            
             alert('Thank you! We will be in touch soon.');
             this.showContactForm = false;
             this.contactData = {
@@ -158,6 +173,67 @@ class ArchetypeAssessment {
             this.render();
         } else {
             alert('Please complete all fields.');
+        }
+    }
+
+    async sendContactToN8n() {
+        const scores = calculateScores(this.formData);
+        const dominants = getDominantArchetype(scores);
+        const archetypeKey = getArchetypeKey(dominants);
+        const archetypeInfo = ARCHETYPE_DESCRIPTIONS[archetypeKey] || ARCHETYPE_DESCRIPTIONS[dominants[0]];
+
+        const payload = {
+            timestamp: new Date().toISOString(),
+            userInfo: {
+                name: this.contactData.name,
+                organization: this.contactData.organization,
+                role: this.formData.role,
+                email: this.contactData.email
+            },
+            responses: {
+                timeline: this.formData.timeline,
+                decisionMaking: this.formData.decisionMaking,
+                innovation: this.formData.innovation,
+                partnership: this.formData.partnership,
+                budget: this.formData.budget,
+                creative: this.formData.creative,
+                communication: this.formData.communication,
+                competitive: this.formData.competitive,
+                agencyIdeas: this.formData.agencyIdeas,
+                pastLessons: this.formData.pastLessons,
+                additional: this.formData.additional
+            },
+            scores: {
+                architect: Math.round(scores.architect * 100),
+                visionary: Math.round(scores.visionary * 100),
+                accelerator: Math.round(scores.accelerator * 100),
+                entrepreneur: Math.round(scores.entrepreneur * 100)
+            },
+            result: {
+                dominantArchetypes: dominants,
+                archetypeKey: archetypeKey,
+                title: archetypeInfo.title,
+                description: archetypeInfo.description
+            },
+            contactFormSubmitted: true
+        };
+
+        try {
+            const response = await fetch('https://antennagroup.app.n8n.cloud/webhook-test/f72055be-200b-439d-91cd-150df843b74f', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload)
+            });
+
+            if (response.ok) {
+                console.log('Contact form data successfully sent to n8n:', payload);
+            } else {
+                console.error('Failed to send contact data to n8n:', response.status, response.statusText);
+            }
+        } catch (error) {
+            console.error('Error sending contact data to n8n:', error);
         }
     }
 
@@ -181,9 +257,12 @@ class ArchetypeAssessment {
         this.currentStep = -1;
         this.showResults = false;
         this.showContactForm = false;
+        this.loadedFromUrl = false;
         if (this.animationTimer) {
             clearInterval(this.animationTimer);
         }
+        // Clear URL parameters
+        window.history.pushState({}, '', window.location.pathname);
         this.render();
     }
 
@@ -214,6 +293,59 @@ class ArchetypeAssessment {
         document.getElementById('visionary-score').textContent = this.animatedScores.visionary + '%';
         document.getElementById('accelerator-score').textContent = this.animatedScores.accelerator + '%';
         document.getElementById('entrepreneur-score').textContent = this.animatedScores.entrepreneur + '%';
+    }
+
+    saveResultsToUrl() {
+        const params = new URLSearchParams();
+        
+        // Save user info
+        params.set('name', this.formData.name);
+        params.set('org', this.formData.organization);
+        params.set('role', this.formData.role);
+        
+        // Save all responses
+        params.set('timeline', this.formData.timeline);
+        params.set('decision', this.formData.decisionMaking);
+        params.set('innovation', this.formData.innovation);
+        params.set('partnership', this.formData.partnership);
+        params.set('budget', this.formData.budget);
+        params.set('creative', this.formData.creative);
+        params.set('communication', this.formData.communication);
+        params.set('competitive', this.formData.competitive);
+        params.set('agency', this.formData.agencyIdeas);
+        params.set('lessons', this.formData.pastLessons);
+        
+        // Update URL without reloading the page
+        const newUrl = `${window.location.pathname}?${params.toString()}`;
+        window.history.pushState({}, '', newUrl);
+    }
+
+    loadResultsFromUrl() {
+        const params = new URLSearchParams(window.location.search);
+        
+        // Check if we have the minimum required parameters
+        if (!params.has('name') || !params.has('timeline')) {
+            return false;
+        }
+        
+        // Load user info
+        this.formData.name = params.get('name') || '';
+        this.formData.organization = params.get('org') || '';
+        this.formData.role = params.get('role') || '';
+        
+        // Load all responses
+        this.formData.timeline = params.get('timeline') || '';
+        this.formData.decisionMaking = params.get('decision') || '';
+        this.formData.innovation = params.get('innovation') || '';
+        this.formData.partnership = params.get('partnership') || '';
+        this.formData.budget = params.get('budget') || '';
+        this.formData.creative = params.get('creative') || '';
+        this.formData.communication = params.get('communication') || '';
+        this.formData.competitive = params.get('competitive') || '';
+        this.formData.agencyIdeas = params.get('agency') || '';
+        this.formData.pastLessons = params.get('lessons') || '';
+        
+        return true;
     }
 
     renderIntroScreen() {
