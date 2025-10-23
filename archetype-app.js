@@ -7,6 +7,11 @@ class ArchetypeAssessment {
         this.showResults = false;
         this.showError = false;
         this.showContactForm = false;
+        this.notification = {
+            show: false,
+            message: '',
+            type: 'success' // 'success', 'error', 'info'
+        };
         this.animatedScores = {
             architect: 0,
             visionary: 0,
@@ -156,6 +161,25 @@ class ArchetypeAssessment {
         // Don't re-render to avoid losing focus
     }
 
+    showNotification(message, type = 'success') {
+        this.notification = {
+            show: true,
+            message: message,
+            type: type
+        };
+        this.render();
+        
+        // Auto-hide after 5 seconds
+        setTimeout(() => {
+            this.hideNotification();
+        }, 5000);
+    }
+
+    hideNotification() {
+        this.notification.show = false;
+        this.render();
+    }
+
     handleContactSubmit() {
         if (this.contactData.name && this.contactData.organization && this.contactData.email) {
             console.log('Contact form submitted:', this.contactData);
@@ -163,7 +187,7 @@ class ArchetypeAssessment {
             // Send contact data to n8n
             this.sendContactToN8n();
             
-            alert('Thank you! We will be in touch soon.');
+            this.showNotification('Thank you! We will be in touch soon.', 'success');
             this.showContactForm = false;
             this.contactData = {
                 name: this.formData.name,
@@ -172,7 +196,7 @@ class ArchetypeAssessment {
             };
             this.render();
         } else {
-            alert('Please complete all fields.');
+            this.showNotification('Please complete all fields.', 'error');
         }
     }
 
@@ -644,19 +668,45 @@ class ArchetypeAssessment {
         `;
     }
 
+    renderNotification() {
+        if (!this.notification.show) return '';
+        
+        const iconMap = {
+            success: '✓',
+            error: '✕',
+            info: 'ℹ'
+        };
+        
+        return `
+            <div class="fit_notification fit_notification-${this.notification.type}">
+                <div class="fit_notification-content">
+                    <span class="fit_notification-icon">${iconMap[this.notification.type]}</span>
+                    <span class="fit_notification-message">${this.notification.message}</span>
+                    <button class="fit_notification-close" onclick="app.hideNotification()">×</button>
+                </div>
+            </div>
+        `;
+    }
+
     render() {
         const appElement = document.getElementById('app');
         const activeElement = document.activeElement;
         const activeElementId = activeElement ? activeElement.getAttribute('data-field') : null;
         const cursorPosition = activeElement && activeElement.selectionStart !== undefined ? activeElement.selectionStart : null;
         
+        let content = '';
         if (this.showResults) {
-            appElement.innerHTML = this.renderResultsScreen();
+            content = this.renderResultsScreen();
         } else if (!this.formData.name || !this.formData.organization || !this.formData.role || this.currentStep === -1) {
-            appElement.innerHTML = this.renderIntroScreen();
+            content = this.renderIntroScreen();
         } else {
-            appElement.innerHTML = this.renderQuestionScreen();
+            content = this.renderQuestionScreen();
         }
+        
+        // Add notification overlay
+        content += this.renderNotification();
+        
+        appElement.innerHTML = content;
         
         // Restore focus and cursor position
         if (activeElementId && cursorPosition !== null) {

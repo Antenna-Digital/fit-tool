@@ -502,6 +502,88 @@ body {
     background-color: #E5E1DA;
 }
 
+/* ========================================
+   NOTIFICATION SYSTEM
+   ======================================== */
+.fit_notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    min-width: 320px;
+    max-width: 500px;
+    animation: fit_slideIn 0.3s ease-out;
+}
+
+@keyframes fit_slideIn {
+    from {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.fit_notification-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    font-family: 'Inter', sans-serif;
+}
+
+.fit_notification-success .fit_notification-content {
+    background-color: #10b981;
+    color: white;
+}
+
+.fit_notification-error .fit_notification-content {
+    background-color: #ef4444;
+    color: white;
+}
+
+.fit_notification-info .fit_notification-content {
+    background-color: #3b82f6;
+    color: white;
+}
+
+.fit_notification-icon {
+    font-size: 1.5em;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.fit_notification-message {
+    flex: 1;
+    font-size: 0.95em;
+    line-height: 1.4;
+}
+
+.fit_notification-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5em;
+    cursor: pointer;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+    flex-shrink: 0;
+}
+
+.fit_notification-close:hover {
+    opacity: 1;
+}
+
 @media (max-width: 768px) {
     .fit_title-large {
         font-size: 2.5rem;
@@ -517,5 +599,12 @@ body {
 
     .fit_button-group {
         flex-direction: column;
+    }
+    
+    .fit_notification {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        min-width: auto;
     }
 }

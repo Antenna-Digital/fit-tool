@@ -1,0 +1,602 @@
+/* Compass Teaser Styles - All classes prefixed with ct_ */
+
+/* ========================================
+   RESET & BASE STYLES
+   ======================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #e8e4dc;
+    line-height: 1.6;
+    padding: 60px 40px;
+}
+
+/* ========================================
+   LAYOUT
+   ======================================== */
+#app {
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.ct_assessment-container {
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.ct_assessment-view {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+}
+
+.ct_header-section {
+    grid-column: 1;
+}
+
+.ct_questions-column {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.ct_submit-section {
+    grid-column: 1 / -1;
+    text-align: right;
+    margin-top: -33px;
+}
+
+/* ========================================
+   TYPOGRAPHY
+   ======================================== */
+.ct_page-label {
+    background: #dee42e;
+    color: #000000;
+    padding: 1px 2px;
+    font-size: 0.85em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: inline-block;
+    margin-bottom: 30px;
+}
+
+.ct_h1 {
+    font-size: 4.7em;
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: 10px;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+}
+
+.ct_sub-heading {
+    font-size: 2.5em;
+    font-weight: 500;
+    color: #000000;
+    margin-bottom: 25px;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+
+.ct_intro-text {
+    font-size: 0.95em;
+    color: #000000;
+    line-height: 1.7;
+    margin-bottom: 10px;
+}
+
+.ct_intro-text-emphasis {
+    margin-top: 15px;
+    font-weight: 600;
+}
+
+/* ========================================
+   QUESTIONS & SLIDERS
+   ======================================== */
+.ct_question-group {
+    margin-bottom: 0;
+    min-height: 145px;
+}
+
+.ct_question-text {
+    font-size: 0.9em;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 25px;
+    letter-spacing: -0.01em;
+    line-height: 1.4;
+}
+
+.ct_slider-container {
+    position: relative;
+    padding: 20px 0;
+}
+
+.ct_slider {
+    width: 100%;
+    height: 3px;
+    border-radius: 2px;
+    background: #000000;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+}
+
+.ct_slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #000000;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.ct_slider::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+    box-shadow: 0 0 0 8px rgba(0, 0, 0, 0.08);
+    background: #e44736;
+}
+
+.ct_slider::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #000000;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.ct_slider::-moz-range-thumb:hover {
+    transform: scale(1.15);
+    box-shadow: 0 0 0 8px rgba(0, 0, 0, 0.08);
+    background: #e44736;
+}
+
+.ct_slider-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12px;
+    margin-bottom: 10px;
+    font-size: 0.8em;
+    color: #666666;
+    font-weight: 500;
+    gap: 8px;
+}
+
+.ct_slider-labels span {
+    flex: 1;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.ct_slider-labels span.ct_active {
+    color: #000000;
+    font-weight: 600;
+}
+
+/* ========================================
+   BUTTONS
+   ======================================== */
+.ct_btn-submit {
+    background: #d0d0d0;
+    color: #000000;
+    padding: 14px 50px;
+    font-size: 1.1em;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: -0.01em;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.ct_btn-submit::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: #dee42e;
+    transition: left 0.3s ease;
+    z-index: -1;
+}
+
+.ct_btn-submit:hover::before {
+    left: 0;
+}
+
+/* ========================================
+   RESULTS PAGE
+   ======================================== */
+.ct_results-view {
+    display: none;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+}
+
+.ct_results-view.ct_active {
+    display: grid;
+    animation: ct_fadeIn 0.5s ease;
+}
+
+@keyframes ct_fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.ct_results-left {
+    text-align: left;
+}
+
+.ct_score-display {
+    margin-bottom: 40px;
+}
+
+.ct_score-number {
+    font-size: 10em;
+    font-weight: 700;
+    color: #000000;
+    line-height: 1;
+    letter-spacing: -0.03em;
+}
+
+.ct_score-label {
+    font-size: 1.8em;
+    font-weight: 500;
+    color: #1a1a1a;
+    margin: 25px 0 15px;
+    letter-spacing: -0.02em;
+}
+
+.ct_score-label strong {
+    font-weight: 700;
+}
+
+.ct_score-description {
+    font-size: 1em;
+    color: #000000;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+/* ========================================
+   CTA BOX & CONTACT FORM
+   ======================================== */
+.ct_cta-intro {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 0;
+}
+
+.ct_cta-intro-text {
+    font-size: 16px;
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: 20px;
+    letter-spacing: -0.01em;
+    line-height: 1.5;
+}
+
+.ct_cta-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    width: 100%;
+}
+
+.ct_btn-cta-primary,
+.ct_btn-cta-secondary,
+.ct_btn-cta-tertiary {
+    padding: 12px 28px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    border: none;
+}
+
+.ct_btn-cta-primary::before,
+.ct_btn-cta-secondary::before,
+.ct_btn-cta-tertiary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    transition: left 0.3s ease;
+    z-index: -1;
+}
+
+.ct_btn-cta-primary {
+    background: #d0d0d0;
+    color: #000000;
+}
+
+.ct_btn-cta-primary::before {
+    background: #dee42e;
+}
+
+.ct_btn-cta-primary.ct_active {
+    background: #dee42e;
+}
+
+.ct_btn-cta-primary:hover::before {
+    left: 0;
+}
+
+.ct_btn-cta-secondary {
+    background: #d0d0d0;
+    color: #000000;
+}
+
+.ct_btn-cta-secondary::before {
+    background: #000000;
+}
+
+.ct_btn-cta-secondary:hover {
+    color: #ffffff;
+}
+
+.ct_btn-cta-secondary:hover::before {
+    left: 0;
+}
+
+.ct_btn-cta-tertiary {
+    background: #d0d0d0;
+    color: #000000;
+}
+
+.ct_btn-cta-tertiary::before {
+    background: #dee42e;
+}
+
+.ct_btn-cta-tertiary:hover::before {
+    left: 0;
+}
+
+/* Contact Form */
+.ct_contact-form {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 0;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.5s ease, opacity 0.5s ease, padding 0.5s ease;
+}
+
+.ct_contact-form.ct_visible {
+    max-height: 800px;
+    opacity: 1;
+    padding: 40px;
+}
+
+.ct_contact-form h3 {
+    font-size: 1.8em;
+    font-weight: 600;
+    color: #000000;
+    margin-bottom: 20px;
+    letter-spacing: -0.01em;
+    line-height: 1.4;
+}
+
+.ct_form-group {
+    margin-bottom: 20px;
+}
+
+.ct_form-group label {
+    display: block;
+    font-size: 0.9em;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+}
+
+.ct_form-group input,
+.ct_form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 1em;
+    font-family: 'Inter', sans-serif;
+    border: 2px solid #e8e4dc;
+    background: #ffffff;
+    transition: border-color 0.2s ease;
+}
+
+.ct_form-group input:focus,
+.ct_form-group textarea:focus {
+    outline: none;
+    border-color: #000000;
+}
+
+.ct_form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.ct_btn-chat {
+    background: #dee42e;
+    color: #000000;
+    padding: 16px 40px;
+    font-size: 1.1em;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.ct_btn-chat:hover {
+    background: #c9cf29;
+}
+
+/* ========================================
+   NOTIFICATION SYSTEM
+   ======================================== */
+.ct_notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    min-width: 320px;
+    max-width: 500px;
+    animation: ct_slideIn 0.3s ease-out;
+}
+
+@keyframes ct_slideIn {
+    from {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.ct_notification-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    font-family: 'Inter', sans-serif;
+}
+
+.ct_notification-success .ct_notification-content {
+    background-color: #10b981;
+    color: white;
+}
+
+.ct_notification-error .ct_notification-content {
+    background-color: #ef4444;
+    color: white;
+}
+
+.ct_notification-info .ct_notification-content {
+    background-color: #3b82f6;
+    color: white;
+}
+
+.ct_notification-icon {
+    font-size: 1.5em;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.ct_notification-message {
+    flex: 1;
+    font-size: 0.95em;
+    line-height: 1.4;
+}
+
+.ct_notification-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5em;
+    cursor: pointer;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+    flex-shrink: 0;
+}
+
+.ct_notification-close:hover {
+    opacity: 1;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+@media (max-width: 1200px) {
+    .ct_assessment-view,
+    .ct_results-view {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+    
+    .ct_questions-column {
+        gap: 40px;
+    }
+    
+    .ct_header-section {
+        position: relative;
+        top: 0;
+    }
+    
+    .ct_h1 {
+        font-size: 2.8em;
+    }
+    
+    .ct_sub-heading {
+        font-size: 2.2em;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 40px 20px;
+    }
+    
+    .ct_h1 {
+        font-size: 2em;
+    }
+    
+    .ct_sub-heading {
+        font-size: 1.6em;
+    }
+    
+    .ct_score-number {
+        font-size: 6em;
+    }
+    
+    .ct_score-label {
+        font-size: 1.8em;
+    }
+    
+    .ct_cta-buttons {
+        grid-template-columns: 1fr;
+    }
+    
+    .ct_notification {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        min-width: auto;
+    }
+}
