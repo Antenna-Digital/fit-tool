@@ -292,12 +292,25 @@ class CompassTeaserAssessment {
             <div class="ct_question-group">
                 <div class="ct_question-text">${q.text}</div>
                 <div class="ct_slider-container">
-                    <input type="range" min="1" max="5" value="${value}" class="ct_slider" id="${q.id}"
-                        oninput="app.handleSliderChange('${q.id}', this.value)">
-                    <div class="ct_slider-labels">
-                        ${q.labels.map((label, i) => `
-                            <span class="${i === value - 1 ? 'ct_active' : ''}">${label}</span>
-                        `).join('')}
+                    <div class="ct_radio-track"></div>
+                    <div class="ct_radio-options">
+                        ${q.labels.map((label, i) => {
+                            const position = i + 1;
+                            const isActive = position === value;
+                            return `
+                                <label class="ct_radio-option">
+                                    <input 
+                                        type="radio" 
+                                        name="${q.id}" 
+                                        value="${position}"
+                                        ${isActive ? 'checked' : ''}
+                                        onchange="app.handleSliderChange('${q.id}', ${position})"
+                                    >
+                                    <span class="ct_radio-dot ${isActive ? 'ct_active' : ''}"></span>
+                                    <span class="ct_radio-label ${isActive ? 'ct_active' : ''}">${label}</span>
+                                </label>
+                            `;
+                        }).join('')}
                     </div>
                 </div>
             </div>
