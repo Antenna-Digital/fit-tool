@@ -7,6 +7,7 @@ class ArchetypeAssessment {
         this.showResults = false;
         this.showError = false;
         this.showContactForm = false;
+        this.hasRendered = false; // Track if we've rendered before
         this.notification = {
             show: false,
             message: '',
@@ -387,26 +388,27 @@ class ArchetypeAssessment {
     }
 
     renderIntroScreen() {
+        const gsapAttr = this.hasRendered ? '' : ' data-gsap-hide';
         return `
-            <div class="fit_container" data-gsap-hide>
+            <div class="fit_container"${gsapAttr}>
                 <div class="fit_content" style="max-width: 64rem;">
                     <div style="margin-bottom: 1.5rem;">
                         <p style="font-size: 1rem; font-weight: 700; color: black; margin-bottom: 0.5rem;">
-                            <span class="fit_highlight" data-gsap-hide>Let's get started</span>
+                            <span class="fit_highlight"${gsapAttr}>Let's get started</span>
                         </p>
-                        <h2 class="fit_title-large u-text-style-h2" data-gsap-hide>
+                        <h2 class="fit_title-large u-text-style-h2"${gsapAttr}>
                             Your Antenna <strong>FIT</strong> assessment.
                         </h2>
                     </div>
-                    <p class="fit_text-small u-text-style-main" data-gsap-hide>
+                    <p class="fit_text-small u-text-style-main"${gsapAttr}>
                         At Antenna Group, we know that great work starts with great relationships. We also understand that no two clients are exactly the same.
                     </p>
-                    <p class="fit_text-small u-text-style-main" data-gsap-hide style="margin-bottom: 2rem;">
+                    <p class="fit_text-small u-text-style-main"${gsapAttr} style="margin-bottom: 2rem;">
                         FIT is our framework for smarter, more personalized client partnerships. It helps us tailor how we work with each client based on their unique goals, communication style, and definition of value.
                     </p>
 
                     <div style="max-width: 40rem; margin-bottom: 2rem;">
-                        <div class="fit_form-group" data-gsap-hide>
+                        <div class="fit_form-group"${gsapAttr}>
                             <label class="fit_form-label u-text-style-small">Name</label>
                             <input
                                 type="text"
@@ -417,7 +419,7 @@ class ArchetypeAssessment {
                                 oninput="app.handleInputChange('name', this.value)"
                             />
                         </div>
-                        <div class="fit_form-group" data-gsap-hide>
+                        <div class="fit_form-group"${gsapAttr}>
                             <label class="fit_form-label u-text-style-small">Organization</label>
                             <input
                                 type="text"
@@ -428,7 +430,7 @@ class ArchetypeAssessment {
                                 oninput="app.handleInputChange('organization', this.value)"
                             />
                         </div>
-                        <div class="fit_form-group" data-gsap-hide>
+                        <div class="fit_form-group"${gsapAttr}>
                             <label class="fit_form-label u-text-style-small">Role</label>
                             <input
                                 type="text"
@@ -450,7 +452,7 @@ class ArchetypeAssessment {
                     <button
                         onclick="app.handleStartAssessment()"
                         class="fit_button-swipe"
-                        data-gsap-hide
+                        ${gsapAttr}
                     >
                         <span>START SELF-ASSESSMENT</span>
                         <span>${ChevronRight}</span>
@@ -461,11 +463,12 @@ class ArchetypeAssessment {
     }
 
     renderQuestionScreen() {
+        const gsapAttr = this.hasRendered ? '' : ' data-gsap-hide';
         const currentQuestion = QUESTIONS[this.currentStep];
         const progress = ((this.currentStep + 1) / QUESTIONS.length) * 100;
 
         return `
-            <div class="fit_container" data-gsap-hide>
+            <div class="fit_container"${gsapAttr}>
                 <div class="fit_content">
                     <div class="fit_progress-container">
                         <div class="fit_progress-header u-text-style-small">
@@ -507,7 +510,7 @@ class ArchetypeAssessment {
                         <button
                             onclick="app.handleNext()"
                             class="fit_button-swipe"
-                            data-gsap-hide
+                            ${gsapAttr}
                             ${!this.formData[currentQuestion.id] ? 'disabled' : ''}
                         >
                             <span>${this.currentStep === QUESTIONS.length - 1 ? 'See Results' : 'Next'}</span>
@@ -520,6 +523,7 @@ class ArchetypeAssessment {
     }
 
     renderResultsScreen() {
+        const gsapAttr = this.hasRendered ? '' : ' data-gsap-hide';
         const scores = calculateScores(this.formData);
         const dominants = getDominantArchetype(scores);
         const archetypeKey = getArchetypeKey(dominants);
@@ -529,16 +533,16 @@ return `
 <div style="min-height: 100vh; padding: 2rem; font-family: 'Inter', sans-serif; background-color: #E5E1DA;">
 <div class="fit_results-content" style="max-width: 96rem; margin: 0 auto;">
 <p style="font-size: 1rem; font-weight: 700; color: black; margin-bottom: 0.5rem;">
-<span class="fit_highlight" data-gsap-hide>Your results</span>
+<span class="fit_highlight"${gsapAttr}>Your results</span>
 </p>
-<h1 class="fit_title-large u-text-style-h2" data-gsap-hide>Welcome to your<br /><strong>partnership</strong> <strong>profile</strong></h1>
-<p class="fit_text-small u-text-style-main" data-gsap-hide>
+<h1 class="fit_title-large u-text-style-h2"${gsapAttr}>Welcome to your<br /><strong>partnership</strong> <strong>profile</strong></h1>
+<p class="fit_text-small u-text-style-main"${gsapAttr}>
 Thank you for sharing what you value most in an agency relationship.
 </p>
-<p class="fit_text-small u-text-style-main" data-gsap-hide style="margin-bottom: 2rem;">
+<p class="fit_text-small u-text-style-main"${gsapAttr} style="margin-bottom: 2rem;">
 Below is a summary of what we have learnt.
 </p>
-                    <p class="fit_text-small u-text-style-main" data-gsap-hide style="margin-bottom: 2rem;">
+                    <p class="fit_text-small u-text-style-main"${gsapAttr} style="margin-bottom: 2rem;">
                         Below is a summary of what we have learnt.
                     </p>
 
@@ -613,7 +617,7 @@ Below is a summary of what we have learnt.
                             target="_blank"
                             rel="noopener noreferrer"
                             class="fit_button-swipe fit_button-link"
-                            data-gsap-hide
+                            ${gsapAttr}
                         >
                             <span>Visit Antenna Group</span>
                         </a>
@@ -621,7 +625,7 @@ Below is a summary of what we have learnt.
                         <button
                             onclick="app.toggleContactForm()"
                             class="fit_button-swipe"
-                            data-gsap-hide
+                            ${gsapAttr}
                         >
                             <span>${this.showContactForm ? 'Hide Contact Form' : 'Talk To Us'}</span>
                         </button>
@@ -629,7 +633,7 @@ Below is a summary of what we have learnt.
                         <button
                             onclick="app.handleReset()"
                             class="fit_button-swipe"
-                            data-gsap-hide
+                            ${gsapAttr}
                             style="color: #374151; border-color: #9CA3AF;"
                         >
                             <span>Try Again</span>
@@ -682,7 +686,6 @@ Below is a summary of what we have learnt.
                 <button
                     onclick="app.handleContactSubmit()"
                     class="fit_button-swipe"
-                    data-gsap-hide
                     style="width: 100%;"
                 >
                     <span>Submit</span>
@@ -730,6 +733,9 @@ Below is a summary of what we have learnt.
         content += this.renderNotification();
         
         appElement.innerHTML = content;
+        
+        // Mark that we've rendered at least once
+        this.hasRendered = true;
         
         // Restore focus and cursor position
         if (activeElementId && cursorPosition !== null) {

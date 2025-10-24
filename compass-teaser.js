@@ -6,6 +6,7 @@ class CompassTeaserAssessment {
         this.showResults = false;
         this.showContactForm = false;
         this.sliderValues = {};
+        this.hasRendered = false; // Track if we've rendered before
         this.notification = {
             show: false,
             message: '',
@@ -267,12 +268,14 @@ class CompassTeaserAssessment {
     }
 
     renderAssessmentView() {
+        const gsapAttr = this.hasRendered ? '' : ' data-gsap-hide';
+        
         const questionsHtml = COMPASS_QUESTIONS.map((q, index) => {
             const columnClass = index < 4 ? 'first' : 'second';
             const value = this.sliderValues[q.id];
             
             return `
-                <div class="ct_question-group" data-gsap-hide>
+                <div class="ct_question-group"${gsapAttr}>
                     <div class="ct_question-text">${q.text}</div>
                     <div class="ct_slider-container">
                         <input type="range" min="1" max="5" value="${value}" class="ct_slider" id="${q.id}"
@@ -293,11 +296,11 @@ class CompassTeaserAssessment {
         return `
             <div class="ct_assessment-view">
                 <div class="ct_header-section">
-                    <div class="ct_page-label" data-gsap-hide>HOW CONSCIOUS ARE YOU?</div>
-                    <h2 class="ct_h2 u-text-style-h2" data-gsap-hide>Perspective is everything,</h2>
-                    <div class="ct_sub-heading u-text-style-h5" data-gsap-hide>how conscious do you think your brand is?</div>
-                    <p class="ct_intro-text u-text-style-main" data-gsap-hide>Consequential brands are conscious brands.</p>
-                    <p class="ct_intro-text ct_intro-text-emphasis u-text-style-main" data-gsap-hide>Take two minutes to honestly assess where your brand stands across eight critical dimensions. Discover your score, see what's possible, then let's talk about unlocking your brand's full potential.</p>
+                    <div class="ct_page-label"${gsapAttr}>HOW CONSCIOUS ARE YOU?</div>
+                    <h2 class="ct_h2 u-text-style-h2"${gsapAttr}>Perspective is everything,</h2>
+                    <div class="ct_sub-heading u-text-style-h5"${gsapAttr}>how conscious do you think your brand is?</div>
+                    <p class="ct_intro-text u-text-style-main"${gsapAttr}>Consequential brands are conscious brands.</p>
+                    <p class="ct_intro-text ct_intro-text-emphasis u-text-style-main"${gsapAttr}>Take two minutes to honestly assess where your brand stands across eight critical dimensions. Discover your score, see what's possible, then let's talk about unlocking your brand's full potential.</p>
                 </div>
                 
                 <div class="ct_questions-column">
@@ -309,16 +312,17 @@ class CompassTeaserAssessment {
                 </div>
                 
                 <div class="ct_submit-section">
-                    <button type="button" class="ct_btn-submit" onclick="app.handleShowResults(event)" data-gsap-hide>See Results</button>
+                    <button type="button" class="ct_btn-submit" onclick="app.handleShowResults(event)"${gsapAttr}>See Results</button>
                 </div>
             </div>
         `;
     }
     
     renderQuestion(q) {
+        const gsapAttr = this.hasRendered ? '' : ' data-gsap-hide';
         const value = this.sliderValues[q.id];
         return `
-            <div class="ct_question-group" data-gsap-hide>
+            <div class="ct_question-group"${gsapAttr}>
                 <div class="ct_question-text u-text-style-main">${q.text}</div>
                 <div class="ct_slider-container">
                     <div class="ct_radio-track"></div>
@@ -444,6 +448,9 @@ class CompassTeaserAssessment {
         content += this.renderNotification();
         
         appElement.innerHTML = content;
+        
+        // Mark that we've rendered at least once
+        this.hasRendered = true;
     }
 }
 
