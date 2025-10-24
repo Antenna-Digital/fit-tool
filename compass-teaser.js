@@ -172,9 +172,6 @@ class CompassTeaserAssessment {
             this.animateScore(this.calculatedScore);
         }, 300);
         
-        // Scroll to top
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        
         // Note: Webhook is only sent when user submits the contact form
     }
 
