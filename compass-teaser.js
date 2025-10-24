@@ -259,7 +259,7 @@ class CompassTeaserAssessment {
             const value = this.sliderValues[q.id];
             
             return `
-                <div class="ct_question-group" [data-gsap-hide]>
+                <div class="ct_question-group" data-gsap-hide>
                     <div class="ct_question-text">${q.text}</div>
                     <div class="ct_slider-container">
                         <input type="range" min="1" max="5" value="${value}" class="ct_slider" id="${q.id}"
@@ -305,7 +305,7 @@ class CompassTeaserAssessment {
     renderQuestion(q) {
         const value = this.sliderValues[q.id];
         return `
-            <div class="ct_question-group" [data-gsap-hide]>
+            <div class="ct_question-group" data-gsap-hide>
                 <div class="ct_question-text u-text-style-main">${q.text}</div>
                 <div class="ct_slider-container">
                     <div class="ct_radio-track"></div>
