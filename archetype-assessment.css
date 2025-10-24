@@ -37,8 +37,12 @@
 }
 
 .fit_highlight {
-    background-color: var(--swatch--sunglow);
-    padding: 2px 6px;
+    background: var(--swatch--sunglow);
+    color: var(--swatch--dark-900);
+    padding: 1px 2px;
+    text-transform: uppercase;
+    display: inline-block;
+    font-weight: var(--_typography---font--primary-medium);
 }
 
 .fit_title-large {

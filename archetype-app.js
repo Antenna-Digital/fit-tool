@@ -388,7 +388,7 @@ class ArchetypeAssessment {
 
     renderIntroScreen() {
         return `
-            <div class="fit_container">
+            <div class="fit_container" data-gsap-hide>
                 <div class="fit_content" style="max-width: 64rem;">
                     <div style="margin-bottom: 1.5rem;">
                         <p style="font-size: 1rem; font-weight: 700; color: black; margin-bottom: 0.5rem;">
@@ -465,7 +465,7 @@ class ArchetypeAssessment {
         const progress = ((this.currentStep + 1) / QUESTIONS.length) * 100;
 
         return `
-            <div class="fit_container">
+            <div class="fit_container" data-gsap-hide>
                 <div class="fit_content">
                     <div class="fit_progress-container">
                         <div class="fit_progress-header u-text-style-small">
