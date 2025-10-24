@@ -237,7 +237,8 @@ class ArchetypeAssessment {
                 dominantArchetypes: dominants,
                 archetypeKey: archetypeKey,
                 title: archetypeInfo.title,
-                description: archetypeInfo.description
+                description: archetypeInfo.description,
+                resultsUrl: window.location.href
             },
             contactFormSubmitted: true
         };
