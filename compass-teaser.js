@@ -254,7 +254,6 @@ class CompassTeaserAssessment {
         this.contactData = { name: '', email: '', company: '', message: '' };
         
         this.render();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     renderAssessmentView() {
@@ -309,7 +308,7 @@ class CompassTeaserAssessment {
     renderQuestion(q) {
         const value = this.sliderValues[q.id];
         return `
-            <div class="ct_question-group">
+            <div class="ct_question-group" [data-gsap-hide]>
                 <div class="ct_question-text u-text-style-main">${q.text}</div>
                 <div class="ct_slider-container">
                     <div class="ct_radio-track"></div>
@@ -346,7 +345,7 @@ class CompassTeaserAssessment {
                 <div class="ct_results-left">
                     <div class="ct_page-label">WHAT IS THIS TELLING US?</div>
                     <div class="ct_score-display">
-                        <div class="ct_score-number" id="ct_scoreNumber">0</div>
+                        <div class="ct_score-number u-text-style-display" id="ct_scoreNumber">0</div>
                         <div class="ct_score-label u-text-style-h5">Your Indicative <strong>Brand Consciousness Score</strong></div>
                     </div>
                     <div class="ct_score-description u-text-style-main">${description}</div>

@@ -11,7 +11,7 @@
 .ct_assessment-view {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: var(--_spacing---space--8);
+    gap: var(--_spacing---space--6);
     align-items: start;
 }
 
@@ -34,6 +34,21 @@
 /* ========================================
    TYPOGRAPHY
    ======================================== */
+
+/* Counter Webflow's text-trim ::after pseudo-elements */
+.ct_h2::after,
+.ct_sub-heading::after,
+.ct_intro-text::after,
+.ct_question-text::after,
+.ct_radio-label::after,
+.ct_score-label::after,
+.ct_score-description::after,
+.ct_cta-intro-text::after,
+.ct_contact-form h3::after,
+.ct_form-group label::after {
+    display: none !important;
+    content: none !important;
+}
 .ct_page-label {
     background: var(--swatch--sunglow);
     color: var(--swatch--dark-900);
@@ -147,6 +162,10 @@
     color: var(--swatch--gray-80);
     transition: all 0.2s ease;
     text-align: center;
+    word-spacing: 100vw;
+    font-size: .75rem;
+    font-weight: 500;
+    height: 50px;
 }
 
 .ct_radio-option:first-child .ct_radio-label {
@@ -258,9 +277,13 @@
 
 .ct_cta-buttons {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: var(--_spacing---space--3);
     width: 100%;
+}
+
+.ct_btn-cta-primary {
+    grid-column: 1 / -1;
 }
 
 .ct_btn-cta-primary,

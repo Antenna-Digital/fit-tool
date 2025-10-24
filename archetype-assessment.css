@@ -1,4 +1,24 @@
 
+/* Counter Webflow's text-trim ::after pseudo-elements */
+.fit_title-large::after,
+.fit_text-small::after,
+.fit_form-label::after,
+.fit_error-text::after,
+.fit_progress-header::after,
+.fit_question-title::after,
+.fit_question-description::after,
+.fit_option-text::after,
+.fit_quadrant-title::after,
+.fit_quadrant-score::after,
+.fit_axis-label::after,
+.fit_archetype-subtitle::after,
+.fit_archetype-title::after,
+.fit_archetype-description::after,
+.fit_contact-form h3::after {
+    display: none !important;
+    content: none !important;
+}
+
 .fit_container {
     min-height: 100vh;
     padding: var(--_spacing---space--5);
