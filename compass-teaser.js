@@ -99,8 +99,20 @@ class CompassTeaserAssessment {
         }, duration / steps);
     }
 
+    getWebhookUrl() {
+        const appElement = document.getElementById('app');
+        const mode = appElement?.getAttribute('data-mode') || 'production';
+        
+        const urls = {
+            production: 'https://antennagroup.app.n8n.cloud/webhook/14cb2342-5ecc-4dfb-8056-b9a5a2ab61a6',
+            test: 'https://antennagroup.app.n8n.cloud/webhook-test/14cb2342-5ecc-4dfb-8056-b9a5a2ab61a6'
+        };
+        
+        return urls[mode] || urls.production;
+    }
+
     async sendToWebhook(data) {
-        const webhookUrl = 'https://antennagroup.app.n8n.cloud/webhook-test/14cb2342-5ecc-4dfb-8056-b9a5a2ab61a6';
+        const webhookUrl = this.getWebhookUrl();
         
         try {
             console.log('=== WEBHOOK SUBMISSION START ===');
