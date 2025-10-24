@@ -160,7 +160,9 @@ class CompassTeaserAssessment {
         }
     }
 
-    handleShowResults() {
+    handleShowResults(event) {
+        if (event) event.preventDefault();
+        
         this.showResults = true;
         this.calculatedScore = this.calculateScore().avgScore;
         this.render();
@@ -176,7 +178,9 @@ class CompassTeaserAssessment {
         // Note: Webhook is only sent when user submits the contact form
     }
 
-    handleToggleContactForm() {
+    handleToggleContactForm(event) {
+        if (event) event.preventDefault();
+        
         this.showContactForm = !this.showContactForm;
         this.render();
     }
@@ -185,7 +189,9 @@ class CompassTeaserAssessment {
         this.contactData[field] = value;
     }
 
-    async handleContactSubmit() {
+    async handleContactSubmit(event) {
+        if (event) event.preventDefault();
+        
         if (!this.contactData.name || !this.contactData.email || !this.contactData.company) {
             this.showNotification('Please complete all required fields.', 'error');
             return;
@@ -235,7 +241,9 @@ class CompassTeaserAssessment {
         }
     }
 
-    handleTryAgain() {
+    handleTryAgain(event) {
+        if (event) event.preventDefault();
+        
         // Reset all sliders to default
         COMPASS_QUESTIONS.forEach(q => {
             this.sliderValues[q.id] = 3;
@@ -255,7 +263,7 @@ class CompassTeaserAssessment {
             const value = this.sliderValues[q.id];
             
             return `
-                <div class="ct_question-group">
+                <div class="ct_question-group" [data-gsap-hide]>
                     <div class="ct_question-text">${q.text}</div>
                     <div class="ct_slider-container">
                         <input type="range" min="1" max="5" value="${value}" class="ct_slider" id="${q.id}"
@@ -277,10 +285,10 @@ class CompassTeaserAssessment {
             <div class="ct_assessment-view">
                 <div class="ct_header-section">
                     <div class="ct_page-label">HOW CONSCIOUS ARE YOU?</div>
-                    <h1 class="ct_h1">Perspective is everything,</h1>
-                    <div class="ct_sub-heading">how conscious do you think your brand is?</div>
-                    <p class="ct_intro-text">Consequential brands are conscious brands.</p>
-                    <p class="ct_intro-text ct_intro-text-emphasis">Take two minutes to honestly assess where your brand stands across eight critical dimensions. Discover your score, see what's possible, then let's talk about unlocking your brand's full potential.</p>
+                    <h2 class="ct_h2 u-text-style-h2">Perspective is everything,</h2>
+                    <div class="ct_sub-heading u-text-style-h5">how conscious do you think your brand is?</div>
+                    <p class="ct_intro-text u-text-style-main">Consequential brands are conscious brands.</p>
+                    <p class="ct_intro-text ct_intro-text-emphasis u-text-style-main">Take two minutes to honestly assess where your brand stands across eight critical dimensions. Discover your score, see what's possible, then let's talk about unlocking your brand's full potential.</p>
                 </div>
                 
                 <div class="ct_questions-column">
@@ -292,7 +300,7 @@ class CompassTeaserAssessment {
                 </div>
                 
                 <div class="ct_submit-section">
-                    <button class="ct_btn-submit" onclick="app.handleShowResults()">See Results</button>
+                    <button type="button" class="ct_btn-submit" onclick="app.handleShowResults(event)">See Results</button>
                 </div>
             </div>
         `;
@@ -302,7 +310,7 @@ class CompassTeaserAssessment {
         const value = this.sliderValues[q.id];
         return `
             <div class="ct_question-group">
-                <div class="ct_question-text">${q.text}</div>
+                <div class="ct_question-text u-text-style-main">${q.text}</div>
                 <div class="ct_slider-container">
                     <div class="ct_radio-track"></div>
                     <div class="ct_radio-options">
@@ -319,7 +327,7 @@ class CompassTeaserAssessment {
                                         onchange="app.handleSliderChange('${q.id}', ${position})"
                                     >
                                     <span class="ct_radio-dot ${isActive ? 'ct_active' : ''}"></span>
-                                    <span class="ct_radio-label ${isActive ? 'ct_active' : ''}">${label}</span>
+                                    <span class="ct_radio-label u-text-style-small ${isActive ? 'ct_active' : ''}">${label}</span>
                                 </label>
                             `;
                         }).join('')}
@@ -339,18 +347,18 @@ class CompassTeaserAssessment {
                     <div class="ct_page-label">WHAT IS THIS TELLING US?</div>
                     <div class="ct_score-display">
                         <div class="ct_score-number" id="ct_scoreNumber">0</div>
-                        <div class="ct_score-label">Your Indicative <strong>Brand Consciousness Score</strong></div>
+                        <div class="ct_score-label u-text-style-h5">Your Indicative <strong>Brand Consciousness Score</strong></div>
                     </div>
-                    <div class="ct_score-description">${description}</div>
+                    <div class="ct_score-description u-text-style-main">${description}</div>
                 </div>
                 
                 <div>
                     <div class="ct_cta-intro">
-                        <p class="ct_cta-intro-text">This is just an introduction to brand consciousness. If you are looking to make a real impact with your brand, please either take our broader self-assessment or connect with us to discuss a brand deep dive geared toward realizing your brand's potential.</p>
+                        <p class="ct_cta-intro-text u-text-style-main">This is just an introduction to brand consciousness. If you are looking to make a real impact with your brand, please either take our broader self-assessment or connect with us to discuss a brand deep dive geared toward realizing your brand's potential.</p>
                         <div class="ct_cta-buttons">
-                            <button class="ct_btn-cta-primary ${this.showContactForm ? 'ct_active' : ''}" onclick="app.handleToggleContactForm()">Let's Chat</button>
+                            <button class="ct_btn-cta-primary ${this.showContactForm ? 'ct_active' : ''}" onclick="app.handleToggleContactForm(event)">Let's Chat</button>
                             <button class="ct_btn-cta-secondary" onclick="window.location.href='#broader-assessment'">Try Our Broader Self Assessment</button>
-                            <button class="ct_btn-cta-tertiary" onclick="app.handleTryAgain()">Try Again</button>
+                            <button class="ct_btn-cta-tertiary" onclick="app.handleTryAgain(event)">Try Again</button>
                         </div>
                     </div>
                     
@@ -363,31 +371,31 @@ class CompassTeaserAssessment {
     renderContactForm() {
         return `
             <div class="ct_contact-form ct_visible">
-                <h3>Let's Chat</h3>
+                <h3 class="u-text-style-h5">Let's Chat</h3>
                 <div class="ct_form-group">
-                    <label>Name</label>
+                    <label class="u-text-style-small">Name</label>
                     <input type="text" value="${this.contactData.name}" 
                         oninput="app.handleContactChange('name', this.value)" 
                         placeholder="Your name" required>
                 </div>
                 <div class="ct_form-group">
-                    <label>Email</label>
+                    <label class="u-text-style-small">Email</label>
                     <input type="email" value="${this.contactData.email}" 
                         oninput="app.handleContactChange('email', this.value)" 
                         placeholder="your@email.com" required>
                 </div>
                 <div class="ct_form-group">
-                    <label>Company</label>
+                    <label class="u-text-style-small">Company</label>
                     <input type="text" value="${this.contactData.company}" 
                         oninput="app.handleContactChange('company', this.value)" 
                         placeholder="Your company" required>
                 </div>
                 <div class="ct_form-group">
-                    <label>Message</label>
+                    <label class="u-text-style-small">Message</label>
                     <textarea oninput="app.handleContactChange('message', this.value)" 
                         placeholder="Tell us about your brand goals...">${this.contactData.message}</textarea>
                 </div>
-                <button type="button" class="ct_btn-chat" onclick="app.handleContactSubmit()">Submit</button>
+                <button type="button" class="ct_btn-chat" onclick="app.handleContactSubmit(event)">Submit</button>
             </div>
         `;
     }

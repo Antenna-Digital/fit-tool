@@ -394,20 +394,20 @@ class ArchetypeAssessment {
                         <p style="font-size: 1rem; font-weight: 700; color: black; margin-bottom: 0.5rem;">
                             <span class="fit_highlight">Let's get started</span>
                         </p>
-                        <h1 class="fit_title-large">
+                        <h2 class="fit_title-large u-text-style-h2">
                             Your Antenna <strong>FIT</strong> assessment.
-                        </h1>
+                        </h2>
                     </div>
-                    <p class="fit_text-small">
+                    <p class="fit_text-small u-text-style-main">
                         At Antenna Group, we know that great work starts with great relationships. We also understand that no two clients are exactly the same.
                     </p>
-                    <p class="fit_text-small" style="margin-bottom: 2rem;">
+                    <p class="fit_text-small u-text-style-main" style="margin-bottom: 2rem;">
                         FIT is our framework for smarter, more personalized client partnerships. It helps us tailor how we work with each client based on their unique goals, communication style, and definition of value.
                     </p>
 
                     <div style="max-width: 40rem; margin-bottom: 2rem;">
                         <div class="fit_form-group">
-                            <label class="fit_form-label">Name</label>
+                            <label class="fit_form-label u-text-style-small">Name</label>
                             <input
                                 type="text"
                                 class="fit_form-input"
@@ -418,7 +418,7 @@ class ArchetypeAssessment {
                             />
                         </div>
                         <div class="fit_form-group">
-                            <label class="fit_form-label">Organization</label>
+                            <label class="fit_form-label u-text-style-small">Organization</label>
                             <input
                                 type="text"
                                 class="fit_form-input"
@@ -429,7 +429,7 @@ class ArchetypeAssessment {
                             />
                         </div>
                         <div class="fit_form-group">
-                            <label class="fit_form-label">Role</label>
+                            <label class="fit_form-label u-text-style-small">Role</label>
                             <input
                                 type="text"
                                 class="fit_form-input"
@@ -443,7 +443,7 @@ class ArchetypeAssessment {
 
                     ${this.showError ? `
                         <div class="fit_error-box">
-                            <p class="fit_error-text">Please complete all 3 fields to continue.</p>
+                            <p class="fit_error-text u-text-style-small">Please complete all 3 fields to continue.</p>
                         </div>
                     ` : ''}
 
@@ -467,7 +467,7 @@ class ArchetypeAssessment {
             <div class="fit_container">
                 <div class="fit_content">
                     <div class="fit_progress-container">
-                        <div class="fit_progress-header">
+                        <div class="fit_progress-header u-text-style-small">
                             <span>Question ${this.currentStep + 1} of ${QUESTIONS.length}</span>
                             <span>${Math.round(progress)}% Complete</span>
                         </div>
@@ -476,8 +476,8 @@ class ArchetypeAssessment {
                         </div>
                     </div>
 
-                    <h2 class="fit_question-title">${currentQuestion.question}</h2>
-                    <p class="fit_question-description">${currentQuestion.description}</p>
+                    <h2 class="fit_question-title u-text-style-h5">${currentQuestion.question}</h2>
+                    <p class="fit_question-description u-text-style-large">${currentQuestion.description}</p>
 
                     <div class="fit_options-container">
                         ${currentQuestion.options.map(option => `
@@ -490,7 +490,7 @@ class ArchetypeAssessment {
                                     ${this.formData[currentQuestion.id] === option.value ? 'checked' : ''}
                                     onchange="app.handleInputChange('${currentQuestion.id}', '${option.value}')"
                                 />
-                                <span class="fit_option-text">${option.label}</span>
+                                <span class="fit_option-text u-text-style-main">${option.label}</span>
                             </label>
                         `).join('')}
                     </div>
@@ -529,11 +529,11 @@ class ArchetypeAssessment {
                     <p style="font-size: 1rem; font-weight: 700; color: black; margin-bottom: 0.5rem;">
                         <span class="fit_highlight">Your results</span>
                     </p>
-                    <h1 class="fit_title-large">Welcome to your<br /><strong>partnership</strong> <strong>profile</strong></h1>
-                    <p class="fit_text-small">
+                    <h1 class="fit_title-large u-text-style-h2">Welcome to your<br /><strong>partnership</strong> <strong>profile</strong></h1>
+                    <p class="fit_text-small u-text-style-main">
                         Thank you for sharing what you value most in an agency relationship.
                     </p>
-                    <p class="fit_text-small" style="margin-bottom: 2rem;">
+                    <p class="fit_text-small u-text-style-main" style="margin-bottom: 2rem;">
                         Below is a summary of what we have learnt.
                     </p>
 
@@ -547,8 +547,8 @@ class ArchetypeAssessment {
                         <div class="fit_quadrant" style="left: 0; top: 0;">
                             <div class="fit_quadrant-overlay" style="width: ${scores.architect * 100}%; height: ${scores.architect * 100}%; right: 0; bottom: 0; background-color: ${scores.architect > 0 ? '#dde32f' : 'transparent'};"></div>
                             <div class="fit_quadrant-content">
-                                <h3 class="fit_quadrant-title" style="color: ${scores.architect > 0 ? 'black' : '#D1D5DB'};">ARCHITECT</h3>
-                                <p class="fit_quadrant-score" style="color: ${scores.architect > 0 ? 'black' : '#D1D5DB'};" id="architect-score">${this.animatedScores.architect}%</p>
+                                <h3 class="fit_quadrant-title u-text-style-h6" style="color: ${scores.architect > 0 ? 'black' : '#D1D5DB'};">ARCHITECT</h3>
+                                <p class="fit_quadrant-score u-text-style-h5" style="color: ${scores.architect > 0 ? 'black' : '#D1D5DB'};" id="architect-score">${this.animatedScores.architect}%</p>
                             </div>
                         </div>
 
@@ -556,8 +556,8 @@ class ArchetypeAssessment {
                         <div class="fit_quadrant" style="right: 0; top: 0;">
                             <div class="fit_quadrant-overlay" style="width: ${scores.visionary * 100}%; height: ${scores.visionary * 100}%; left: 0; bottom: 0; background-color: ${scores.visionary > 0 ? '#dde32f' : 'transparent'};"></div>
                             <div class="fit_quadrant-content">
-                                <h3 class="fit_quadrant-title" style="color: ${scores.visionary > 0 ? 'black' : '#D1D5DB'};">VISIONARY</h3>
-                                <p class="fit_quadrant-score" style="color: ${scores.visionary > 0 ? 'black' : '#D1D5DB'};" id="visionary-score">${this.animatedScores.visionary}%</p>
+                                <h3 class="fit_quadrant-title u-text-style-h6" style="color: ${scores.visionary > 0 ? 'black' : '#D1D5DB'};">VISIONARY</h3>
+                                <p class="fit_quadrant-score u-text-style-h5" style="color: ${scores.visionary > 0 ? 'black' : '#D1D5DB'};" id="visionary-score">${this.animatedScores.visionary}%</p>
                             </div>
                         </div>
 
@@ -565,8 +565,8 @@ class ArchetypeAssessment {
                         <div class="fit_quadrant" style="left: 0; bottom: 0;">
                             <div class="fit_quadrant-overlay" style="width: ${scores.accelerator * 100}%; height: ${scores.accelerator * 100}%; right: 0; top: 0; background-color: ${scores.accelerator > 0 ? '#dde32f' : 'transparent'};"></div>
                             <div class="fit_quadrant-content">
-                                <h3 class="fit_quadrant-title" style="color: ${scores.accelerator > 0 ? 'black' : '#D1D5DB'};">ACCELERATOR</h3>
-                                <p class="fit_quadrant-score" style="color: ${scores.accelerator > 0 ? 'black' : '#D1D5DB'};" id="accelerator-score">${this.animatedScores.accelerator}%</p>
+                                <h3 class="fit_quadrant-title u-text-style-h6" style="color: ${scores.accelerator > 0 ? 'black' : '#D1D5DB'};">ACCELERATOR</h3>
+                                <p class="fit_quadrant-score u-text-style-h5" style="color: ${scores.accelerator > 0 ? 'black' : '#D1D5DB'};" id="accelerator-score">${this.animatedScores.accelerator}%</p>
                             </div>
                         </div>
 
@@ -574,8 +574,8 @@ class ArchetypeAssessment {
                         <div class="fit_quadrant" style="right: 0; bottom: 0;">
                             <div class="fit_quadrant-overlay" style="width: ${scores.entrepreneur * 100}%; height: ${scores.entrepreneur * 100}%; left: 0; top: 0; background-color: ${scores.entrepreneur > 0 ? '#dde32f' : 'transparent'};"></div>
                             <div class="fit_quadrant-content">
-                                <h3 class="fit_quadrant-title" style="color: ${scores.entrepreneur > 0 ? 'black' : '#D1D5DB'};">ENTREPRENEUR</h3>
-                                <p class="fit_quadrant-score" style="color: ${scores.entrepreneur > 0 ? 'black' : '#D1D5DB'};" id="entrepreneur-score">${this.animatedScores.entrepreneur}%</p>
+                                <h3 class="fit_quadrant-title u-text-style-h6" style="color: ${scores.entrepreneur > 0 ? 'black' : '#D1D5DB'};">ENTREPRENEUR</h3>
+                                <p class="fit_quadrant-score u-text-style-h5" style="color: ${scores.entrepreneur > 0 ? 'black' : '#D1D5DB'};" id="entrepreneur-score">${this.animatedScores.entrepreneur}%</p>
                             </div>
                         </div>
 
@@ -590,16 +590,16 @@ class ArchetypeAssessment {
                         <div class="fit_arrow fit_arrow-right"></div>
                         
                         <!-- Labels -->
-                        <div class="fit_axis-label fit_axis-label-top">Strategic/Creative</div>
-                        <div class="fit_axis-label fit_axis-label-bottom">Pragmatic/Tactical</div>
-                        <div class="fit_axis-label fit_axis-label-left">Structured/Systematic</div>
-                        <div class="fit_axis-label fit_axis-label-right">Flexible/Adaptive</div>
+                        <div class="fit_axis-label fit_axis-label-top u-text-style-small">Strategic/Creative</div>
+                        <div class="fit_axis-label fit_axis-label-bottom u-text-style-small">Pragmatic/Tactical</div>
+                        <div class="fit_axis-label fit_axis-label-left u-text-style-small">Structured/Systematic</div>
+                        <div class="fit_axis-label fit_axis-label-right u-text-style-small">Flexible/Adaptive</div>
                     </div>
 
                     <div class="fit_archetype-box">
-                        <h2 class="fit_archetype-subtitle">Your Dominant Archetype:</h2>
-                        <h3 class="fit_archetype-title">${archetypeInfo.title}</h3>
-                        <p class="fit_archetype-description">${archetypeInfo.description}</p>
+                        <h2 class="fit_archetype-subtitle u-text-style-small">Your Dominant Archetype:</h2>
+                        <h3 class="fit_archetype-title u-text-style-h4">${archetypeInfo.title}</h3>
+                        <p class="fit_archetype-description u-text-style-main">${archetypeInfo.description}</p>
                     </div>
 
                     <div class="fit_results-buttons">
@@ -637,9 +637,9 @@ class ArchetypeAssessment {
     renderContactForm() {
         return `
             <div class="fit_contact-form">
-                <h3>Get in touch</h3>
+                <h3 class="u-text-style-h6">Get in touch</h3>
                 <div class="fit_form-group">
-                    <label class="fit_form-label">Name</label>
+                    <label class="fit_form-label u-text-style-small">Name</label>
                     <input
                         type="text"
                         class="fit_form-input"
@@ -650,7 +650,7 @@ class ArchetypeAssessment {
                     />
                 </div>
                 <div class="fit_form-group">
-                    <label class="fit_form-label">Organization</label>
+                    <label class="fit_form-label u-text-style-small">Organization</label>
                     <input
                         type="text"
                         class="fit_form-input"

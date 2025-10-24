@@ -1,17 +1,17 @@
 #app {
-    max-width: 1600px;
+    max-width: var(--max-width--larger);
     margin: 0 auto;
 }
 
 .ct_assessment-container {
-    max-width: 1600px;
+    max-width: var(--max-width--larger);
     margin: 0 auto;
 }
 
 .ct_assessment-view {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 60px;
+    gap: var(--_spacing---space--8);
     align-items: start;
 }
 
@@ -22,58 +22,45 @@
 .ct_questions-column {
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: var(--_spacing---space--5);
 }
 
 .ct_submit-section {
     grid-column: 1 / -1;
     text-align: right;
-    margin-top: -33px;
+    margin-top: calc(-1 * var(--_spacing---space--6));
 }
 
 /* ========================================
    TYPOGRAPHY
    ======================================== */
 .ct_page-label {
-    background: #dee42e;
-    color: #000000;
+    background: var(--swatch--sunglow);
+    color: var(--swatch--dark-900);
     padding: 1px 2px;
-    font-size: 0.85em;
-    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
     display: inline-block;
-    margin-bottom: 30px;
+    margin-bottom: var(--_spacing---space--6);
 }
 
-.ct_h1 {
-    font-size: 4.7em;
-    font-weight: 700;
-    color: #000000;
-    margin-bottom: 10px;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
+.ct_h2 {
+    color: var(--swatch--dark-900);
+    margin-bottom: var(--_spacing---space--2);
 }
 
 .ct_sub-heading {
-    font-size: 2.5em;
-    font-weight: 500;
-    color: #000000;
-    margin-bottom: 25px;
-    line-height: 1.2;
-    letter-spacing: -0.02em;
+    margin-top: var(--_spacing---space--4);
+    color: var(--swatch--dark-900);
+    margin-bottom: var(--_spacing---space--5);
 }
 
 .ct_intro-text {
-    font-size: 0.95em;
-    color: #000000;
-    line-height: 1.7;
-    margin-bottom: 10px;
+    color: var(--swatch--dark-900);
+    margin-bottom: var(--_spacing---space--2);
 }
 
 .ct_intro-text-emphasis {
-    margin-top: 15px;
-    font-weight: 600;
+    margin-top: var(--_spacing---space--4);
 }
 
 /* ========================================
@@ -85,16 +72,12 @@
 }
 
 .ct_question-text {
-    font-size: 0.9em;
-    font-weight: 600;
-    color: #1a1a1a;
-    margin-bottom: 25px;
-    letter-spacing: -0.01em;
-    line-height: 1.4;
+    color: var(--swatch--dark-900);
+    margin-bottom: var(--_spacing---space--5);
 }
 
 .ct_slider-container {
-    margin-bottom: 25px;
+    margin-bottom: var(--_spacing---space--5);
     position: relative;
 }
 
@@ -104,7 +87,7 @@
     left: 0;
     right: 0;
     height: 3px;
-    background: #000000;
+    background: var(--swatch--dark-900);
     border-radius: 2px;
     z-index: 0;
 }
@@ -144,11 +127,11 @@
     border-radius: 50%;
     background: transparent;
     transition: all 0.2s ease;
-    margin-bottom: 12px;
+    margin-bottom: var(--_spacing---space--3);
 }
 
 .ct_radio-dot.ct_active {
-    background: #000000;
+    background: var(--swatch--dark-900);
 }
 
 .ct_radio-option:hover .ct_radio-dot {
@@ -157,16 +140,13 @@
 }
 
 .ct_radio-option:hover .ct_radio-dot.ct_active {
-    background: #e44736;
+    background: var(--swatch--tertiary);
 }
 
 .ct_radio-label {
-    font-size: calc(0.8em - 2px);
-    color: #666666;
-    font-weight: 500;
+    color: var(--swatch--gray-80);
     transition: all 0.2s ease;
     text-align: center;
-    line-height: 1.2;
 }
 
 .ct_radio-option:first-child .ct_radio-label {
@@ -178,24 +158,23 @@
 }
 
 .ct_radio-label.ct_active {
-    color: #000000;
-    font-weight: 600;
+    color: var(--swatch--dark-900);
 }
 
 /* ========================================
    BUTTONS
    ======================================== */
 .ct_btn-submit {
-    background: #d0d0d0;
-    color: #000000;
-    padding: 14px 50px;
+    font-family: var(--_typography---font--primary-family);
     font-size: 1.1em;
-    font-weight: 600;
+    font-weight: var(--_typography---font--primary-medium);
+    letter-spacing: var(--_typography---letter-spacing--0-00625em);
+    background: var(--swatch--gray-20);
+    color: var(--swatch--dark-900);
+    padding: 14px 50px;
     border: none;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-family: 'Inter', sans-serif;
-    letter-spacing: -0.01em;
     position: relative;
     overflow: hidden;
     z-index: 1;
@@ -208,7 +187,7 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: #dee42e;
+    background: var(--swatch--sunglow);
     transition: left 0.3s ease;
     z-index: -1;
 }
@@ -223,7 +202,7 @@
 .ct_results-view {
     display: none;
     grid-template-columns: 1fr 1fr;
-    gap: 80px;
+    gap: var(--_spacing---space--8);
     align-items: start;
 }
 
@@ -246,70 +225,54 @@
 }
 
 .ct_score-display {
-    margin-bottom: 40px;
+    margin-bottom: var(--_spacing---space--7);
 }
 
 .ct_score-number {
-    font-size: 10em;
-    font-weight: 700;
-    color: #000000;
-    line-height: 1;
-    letter-spacing: -0.03em;
+    color: var(--swatch--dark-900);
 }
 
 .ct_score-label {
-    font-size: 1.8em;
-    font-weight: 500;
-    color: #1a1a1a;
-    margin: 25px 0 15px;
-    letter-spacing: -0.02em;
-}
-
-.ct_score-label strong {
-    font-weight: 700;
+    color: var(--swatch--dark-900);
+    margin: var(--_spacing---space--5) 0 var(--_spacing---space--4);
 }
 
 .ct_score-description {
-    font-size: 1em;
-    color: #000000;
-    line-height: 1.7;
-    margin-bottom: 20px;
+    color: var(--swatch--dark-900);
+    margin-bottom: var(--_spacing---space--5);
 }
 
 /* ========================================
    CTA BOX & CONTACT FORM
    ======================================== */
 .ct_cta-intro {
-    background: #ffffff;
-    padding: 40px;
+    background: var(--swatch--light-100);
+    padding: var(--_spacing---space--7);
     border-radius: 0;
 }
 
 .ct_cta-intro-text {
-    font-size: 16px;
-    font-weight: 700;
-    color: #000000;
-    margin-bottom: 20px;
-    letter-spacing: -0.01em;
-    line-height: 1.5;
+    color: var(--swatch--dark-900);
+    margin-bottom: var(--_spacing---space--5);
 }
 
 .ct_cta-buttons {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 12px;
+    gap: var(--_spacing---space--3);
     width: 100%;
 }
 
 .ct_btn-cta-primary,
 .ct_btn-cta-secondary,
 .ct_btn-cta-tertiary {
-    padding: 12px 28px;
+    font-family: var(--_typography---font--primary-family);
     font-size: 1em;
-    font-weight: 600;
+    font-weight: var(--_typography---font--primary-medium);
+    letter-spacing: var(--_typography---letter-spacing--0em);
+    padding: var(--_spacing---space--3) 28px;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-family: 'Inter', sans-serif;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -331,16 +294,16 @@
 }
 
 .ct_btn-cta-primary {
-    background: #d0d0d0;
-    color: #000000;
+    background: var(--swatch--gray-20);
+    color: var(--swatch--dark-900);
 }
 
 .ct_btn-cta-primary::before {
-    background: #dee42e;
+    background: var(--swatch--sunglow);
 }
 
 .ct_btn-cta-primary.ct_active {
-    background: #dee42e;
+    background: var(--swatch--sunglow);
 }
 
 .ct_btn-cta-primary:hover::before {
@@ -348,16 +311,16 @@
 }
 
 .ct_btn-cta-secondary {
-    background: #d0d0d0;
-    color: #000000;
+    background: var(--swatch--gray-20);
+    color: var(--swatch--dark-900);
 }
 
 .ct_btn-cta-secondary::before {
-    background: #000000;
+    background: var(--swatch--dark-900);
 }
 
 .ct_btn-cta-secondary:hover {
-    color: #ffffff;
+    color: var(--swatch--light-100);
 }
 
 .ct_btn-cta-secondary:hover::before {
@@ -365,12 +328,12 @@
 }
 
 .ct_btn-cta-tertiary {
-    background: #d0d0d0;
-    color: #000000;
+    background: var(--swatch--gray-20);
+    color: var(--swatch--dark-900);
 }
 
 .ct_btn-cta-tertiary::before {
-    background: #dee42e;
+    background: var(--swatch--sunglow);
 }
 
 .ct_btn-cta-tertiary:hover::before {
@@ -379,8 +342,8 @@
 
 /* Contact Form */
 .ct_contact-form {
-    background: #ffffff;
-    padding: 40px;
+    background: var(--swatch--light-100);
+    padding: var(--_spacing---space--7);
     border-radius: 0;
     max-height: 0;
     overflow: hidden;
@@ -391,45 +354,39 @@
 .ct_contact-form.ct_visible {
     max-height: 800px;
     opacity: 1;
-    padding: 40px;
+    padding: var(--_spacing---space--7);
 }
 
 .ct_contact-form h3 {
-    font-size: 1.8em;
-    font-weight: 600;
-    color: #000000;
-    margin-bottom: 20px;
-    letter-spacing: -0.01em;
-    line-height: 1.4;
+    color: var(--swatch--dark-900);
+    margin-bottom: var(--_spacing---space--5);
 }
 
 .ct_form-group {
-    margin-bottom: 20px;
+    margin-bottom: var(--_spacing---space--5);
 }
 
 .ct_form-group label {
     display: block;
-    font-size: 0.9em;
-    font-weight: 600;
-    color: #1a1a1a;
-    margin-bottom: 8px;
+    font-size: var(--_typography---font-size--label); /* 13px */
+    font-weight: 500;
+    color: var(--swatch--gray-100);
+    margin-bottom: var(--_spacing---space--2);
 }
 
 .ct_form-group input,
 .ct_form-group textarea {
     width: 100%;
-    padding: 12px 15px;
-    font-size: 1em;
-    font-family: 'Inter', sans-serif;
-    border: 2px solid #e8e4dc;
-    background: #ffffff;
+    padding: var(--_spacing---space--3) var(--_spacing---space--4);
+    border: 2px solid var(--swatch--muse);
+    background: var(--swatch--light-100);
     transition: border-color 0.2s ease;
 }
 
 .ct_form-group input:focus,
 .ct_form-group textarea:focus {
     outline: none;
-    border-color: #000000;
+    border-color: var(--swatch--dark-900);
 }
 
 .ct_form-group textarea {
@@ -438,21 +395,22 @@
 }
 
 .ct_btn-chat {
-    background: #dee42e;
-    color: #000000;
-    padding: 16px 40px;
+    font-family: var(--_typography---font--primary-family);
     font-size: 1.1em;
-    font-weight: 600;
+    font-weight: var(--_typography---font--primary-medium);
+    letter-spacing: var(--_typography---letter-spacing--0em);
+    background: var(--swatch--sunglow);
+    color: var(--swatch--dark-900);
+    padding: var(--_spacing---space--4) var(--_spacing---space--7);
     border: none;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-family: 'Inter', sans-serif;
     width: 100%;
-    margin-top: 10px;
+    margin-top: var(--_spacing---space--2);
 }
 
 .ct_btn-chat:hover {
-    background: #c9cf29;
+    background: var(--swatch--brand-600);
 }
 
 /* ========================================
@@ -482,11 +440,10 @@
 .ct_notification-content {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 16px 20px;
+    gap: var(--_spacing---space--3);
+    padding: var(--_spacing---space--4) var(--_spacing---space--5);
     border-radius: 4px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    font-family: 'Inter', sans-serif;
 }
 
 .ct_notification-success .ct_notification-content {
@@ -505,22 +462,17 @@
 }
 
 .ct_notification-icon {
-    font-size: 1.5em;
-    font-weight: bold;
     flex-shrink: 0;
 }
 
 .ct_notification-message {
     flex: 1;
-    font-size: 0.95em;
-    line-height: 1.4;
 }
 
 .ct_notification-close {
     background: none;
     border: none;
-    color: white;
-    font-size: 1.5em;
+    color: var(--swatch--light-100);
     cursor: pointer;
     padding: 0;
     width: 24px;
@@ -544,47 +496,20 @@
     .ct_assessment-view,
     .ct_results-view {
         grid-template-columns: 1fr;
-        gap: 50px;
+        gap: var(--_spacing---space--7);
     }
     
     .ct_questions-column {
-        gap: 40px;
+        gap: var(--_spacing---space--7);
     }
     
     .ct_header-section {
         position: relative;
         top: 0;
     }
-    
-    .ct_h1 {
-        font-size: 2.8em;
-    }
-    
-    .ct_sub-heading {
-        font-size: 2.2em;
-    }
 }
 
 @media (max-width: 768px) {
-    body {
-        padding: 40px 20px;
-    }
-    
-    .ct_h1 {
-        font-size: 2em;
-    }
-    
-    .ct_sub-heading {
-        font-size: 1.6em;
-    }
-    
-    .ct_score-number {
-        font-size: 6em;
-    }
-    
-    .ct_score-label {
-        font-size: 1.8em;
-    }
     
     .ct_cta-buttons {
         grid-template-columns: 1fr;
