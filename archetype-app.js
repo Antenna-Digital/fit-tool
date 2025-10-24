@@ -200,6 +200,18 @@ class ArchetypeAssessment {
         }
     }
 
+    getWebhookUrl() {
+        const appElement = document.getElementById('app');
+        const mode = appElement?.getAttribute('data-mode') || 'production';
+        
+        const urls = {
+            production: 'https://antennagroup.app.n8n.cloud/webhook/f72055be-200b-439d-91cd-150df843b74f',
+            test: 'https://antennagroup.app.n8n.cloud/webhook-test/f72055be-200b-439d-91cd-150df843b74f'
+        };
+        
+        return urls[mode] || urls.production;
+    }
+
     async sendContactToN8n() {
         const scores = calculateScores(this.formData);
         const dominants = getDominantArchetype(scores);
@@ -244,7 +256,8 @@ class ArchetypeAssessment {
         };
 
         try {
-            const response = await fetch('https://antennagroup.app.n8n.cloud/webhook-test/f72055be-200b-439d-91cd-150df843b74f', {
+            const webhookUrl = this.getWebhookUrl();
+            const response = await fetch(webhookUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
