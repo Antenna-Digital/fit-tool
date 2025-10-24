@@ -179,7 +179,20 @@ class CompassTeaserAssessment {
         if (event) event.preventDefault();
         
         this.showContactForm = !this.showContactForm;
-        this.render();
+        
+        // Just toggle the form visibility without re-rendering
+        const contactForm = document.querySelector('.ct_contact-form');
+        const button = event.target.closest('.ct_btn-cta-primary');
+        
+        if (contactForm) {
+            if (this.showContactForm) {
+                contactForm.classList.add('ct_visible');
+                if (button) button.classList.add('ct_active');
+            } else {
+                contactForm.classList.remove('ct_visible');
+                if (button) button.classList.remove('ct_active');
+            }
+        }
     }
 
     handleContactChange(field, value) {
@@ -295,8 +308,8 @@ class CompassTeaserAssessment {
                     ${secondColumnQuestions}
                 </div>
                 
-                <div class="ct_submit-section" data-gsap-hide>
-                    <button type="button" class="ct_btn-submit" onclick="app.handleShowResults(event)">See Results</button>
+                <div class="ct_submit-section">
+                    <button type="button" class="ct_btn-submit" onclick="app.handleShowResults(event)" data-gsap-hide>See Results</button>
                 </div>
             </div>
         `;
@@ -358,7 +371,7 @@ class CompassTeaserAssessment {
                         </div>
                     </div>
                     
-                    ${this.showContactForm ? this.renderContactForm() : ''}
+                    ${this.renderContactForm()}
                 </div>
             </div>
         `;
@@ -366,7 +379,7 @@ class CompassTeaserAssessment {
     
     renderContactForm() {
         return `
-            <div class="ct_contact-form ct_visible">
+            <div class="ct_contact-form ${this.showContactForm ? 'ct_visible' : ''}">
                 <h3 class="u-text-style-h5">Let's Chat</h3>
                 <div class="ct_form-group">
                     <label class="u-text-style-small">Name</label>

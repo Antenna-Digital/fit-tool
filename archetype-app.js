@@ -392,21 +392,21 @@ class ArchetypeAssessment {
                 <div class="fit_content" style="max-width: 64rem;">
                     <div style="margin-bottom: 1.5rem;">
                         <p style="font-size: 1rem; font-weight: 700; color: black; margin-bottom: 0.5rem;">
-                            <span class="fit_highlight">Let's get started</span>
+                            <span class="fit_highlight" data-gsap-hide>Let's get started</span>
                         </p>
-                        <h2 class="fit_title-large u-text-style-h2">
+                        <h2 class="fit_title-large u-text-style-h2" data-gsap-hide>
                             Your Antenna <strong>FIT</strong> assessment.
                         </h2>
                     </div>
-                    <p class="fit_text-small u-text-style-main">
+                    <p class="fit_text-small u-text-style-main" data-gsap-hide>
                         At Antenna Group, we know that great work starts with great relationships. We also understand that no two clients are exactly the same.
                     </p>
-                    <p class="fit_text-small u-text-style-main" style="margin-bottom: 2rem;">
+                    <p class="fit_text-small u-text-style-main" data-gsap-hide style="margin-bottom: 2rem;">
                         FIT is our framework for smarter, more personalized client partnerships. It helps us tailor how we work with each client based on their unique goals, communication style, and definition of value.
                     </p>
 
                     <div style="max-width: 40rem; margin-bottom: 2rem;">
-                        <div class="fit_form-group">
+                        <div class="fit_form-group" data-gsap-hide>
                             <label class="fit_form-label u-text-style-small">Name</label>
                             <input
                                 type="text"
@@ -417,7 +417,7 @@ class ArchetypeAssessment {
                                 oninput="app.handleInputChange('name', this.value)"
                             />
                         </div>
-                        <div class="fit_form-group">
+                        <div class="fit_form-group" data-gsap-hide>
                             <label class="fit_form-label u-text-style-small">Organization</label>
                             <input
                                 type="text"
@@ -428,7 +428,7 @@ class ArchetypeAssessment {
                                 oninput="app.handleInputChange('organization', this.value)"
                             />
                         </div>
-                        <div class="fit_form-group">
+                        <div class="fit_form-group" data-gsap-hide>
                             <label class="fit_form-label u-text-style-small">Role</label>
                             <input
                                 type="text"
@@ -450,6 +450,7 @@ class ArchetypeAssessment {
                     <button
                         onclick="app.handleStartAssessment()"
                         class="fit_button-swipe"
+                        data-gsap-hide
                     >
                         <span>START SELF-ASSESSMENT</span>
                         <span>${ChevronRight}</span>
@@ -506,6 +507,7 @@ class ArchetypeAssessment {
                         <button
                             onclick="app.handleNext()"
                             class="fit_button-swipe"
+                            data-gsap-hide
                             ${!this.formData[currentQuestion.id] ? 'disabled' : ''}
                         >
                             <span>${this.currentStep === QUESTIONS.length - 1 ? 'See Results' : 'Next'}</span>
@@ -523,17 +525,20 @@ class ArchetypeAssessment {
         const archetypeKey = getArchetypeKey(dominants);
         const archetypeInfo = ARCHETYPE_DESCRIPTIONS[archetypeKey] || ARCHETYPE_DESCRIPTIONS[dominants[0]];
 
-        return `
-            <div style="min-height: 100vh; padding: 2rem; font-family: 'Inter', sans-serif; background-color: #E5E1DA;">
-                <div class="fit_results-content" style="max-width: 96rem; margin: 0 auto;">
-                    <p style="font-size: 1rem; font-weight: 700; color: black; margin-bottom: 0.5rem;">
-                        <span class="fit_highlight">Your results</span>
-                    </p>
-                    <h1 class="fit_title-large u-text-style-h2">Welcome to your<br /><strong>partnership</strong> <strong>profile</strong></h1>
-                    <p class="fit_text-small u-text-style-main">
-                        Thank you for sharing what you value most in an agency relationship.
-                    </p>
-                    <p class="fit_text-small u-text-style-main" style="margin-bottom: 2rem;">
+return `
+<div style="min-height: 100vh; padding: 2rem; font-family: 'Inter', sans-serif; background-color: #E5E1DA;">
+<div class="fit_results-content" style="max-width: 96rem; margin: 0 auto;">
+<p style="font-size: 1rem; font-weight: 700; color: black; margin-bottom: 0.5rem;">
+<span class="fit_highlight" data-gsap-hide>Your results</span>
+</p>
+<h1 class="fit_title-large u-text-style-h2" data-gsap-hide>Welcome to your<br /><strong>partnership</strong> <strong>profile</strong></h1>
+<p class="fit_text-small u-text-style-main" data-gsap-hide>
+Thank you for sharing what you value most in an agency relationship.
+</p>
+<p class="fit_text-small u-text-style-main" data-gsap-hide style="margin-bottom: 2rem;">
+Below is a summary of what we have learnt.
+</p>
+                    <p class="fit_text-small u-text-style-main" data-gsap-hide style="margin-bottom: 2rem;">
                         Below is a summary of what we have learnt.
                     </p>
 
@@ -608,6 +613,7 @@ class ArchetypeAssessment {
                             target="_blank"
                             rel="noopener noreferrer"
                             class="fit_button-swipe fit_button-link"
+                            data-gsap-hide
                         >
                             <span>Visit Antenna Group</span>
                         </a>
@@ -615,6 +621,7 @@ class ArchetypeAssessment {
                         <button
                             onclick="app.toggleContactForm()"
                             class="fit_button-swipe"
+                            data-gsap-hide
                         >
                             <span>${this.showContactForm ? 'Hide Contact Form' : 'Talk To Us'}</span>
                         </button>
@@ -622,6 +629,7 @@ class ArchetypeAssessment {
                         <button
                             onclick="app.handleReset()"
                             class="fit_button-swipe"
+                            data-gsap-hide
                             style="color: #374151; border-color: #9CA3AF;"
                         >
                             <span>Try Again</span>
@@ -674,6 +682,7 @@ class ArchetypeAssessment {
                 <button
                     onclick="app.handleContactSubmit()"
                     class="fit_button-swipe"
+                    data-gsap-hide
                     style="width: 100%;"
                 >
                     <span>Submit</span>
