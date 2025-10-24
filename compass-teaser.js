@@ -280,11 +280,11 @@ class CompassTeaserAssessment {
         return `
             <div class="ct_assessment-view">
                 <div class="ct_header-section">
-                    <div class="ct_page-label">HOW CONSCIOUS ARE YOU?</div>
-                    <h2 class="ct_h2 u-text-style-h2">Perspective is everything,</h2>
-                    <div class="ct_sub-heading u-text-style-h5">how conscious do you think your brand is?</div>
-                    <p class="ct_intro-text u-text-style-main">Consequential brands are conscious brands.</p>
-                    <p class="ct_intro-text ct_intro-text-emphasis u-text-style-main">Take two minutes to honestly assess where your brand stands across eight critical dimensions. Discover your score, see what's possible, then let's talk about unlocking your brand's full potential.</p>
+                    <div class="ct_page-label" data-gsap-hide>HOW CONSCIOUS ARE YOU?</div>
+                    <h2 class="ct_h2 u-text-style-h2" data-gsap-hide>Perspective is everything,</h2>
+                    <div class="ct_sub-heading u-text-style-h5" data-gsap-hide>how conscious do you think your brand is?</div>
+                    <p class="ct_intro-text u-text-style-main" data-gsap-hide>Consequential brands are conscious brands.</p>
+                    <p class="ct_intro-text ct_intro-text-emphasis u-text-style-main" data-gsap-hide>Take two minutes to honestly assess where your brand stands across eight critical dimensions. Discover your score, see what's possible, then let's talk about unlocking your brand's full potential.</p>
                 </div>
                 
                 <div class="ct_questions-column">
@@ -295,7 +295,7 @@ class CompassTeaserAssessment {
                     ${secondColumnQuestions}
                 </div>
                 
-                <div class="ct_submit-section">
+                <div class="ct_submit-section" data-gsap-hide>
                     <button type="button" class="ct_btn-submit" onclick="app.handleShowResults(event)">See Results</button>
                 </div>
             </div>
