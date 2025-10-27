@@ -370,7 +370,7 @@ class CompassTeaserAssessment {
                         <p class="ct_cta-intro-text u-text-style-main">This is just an introduction to brand consciousness. If you are looking to make a real impact with your brand, please either take our broader self-assessment or connect with us to discuss a brand deep dive geared toward realizing your brand's potential.</p>
                         <div class="ct_cta-buttons">
                             <button class="ct_btn-cta-primary ${this.showContactForm ? 'ct_active' : ''}" onclick="app.handleToggleContactForm(event)">Let's Chat</button>
-                            <button class="ct_btn-cta-secondary" onclick="window.location.href='#broader-assessment'">Try Our Broader Self Assessment</button>
+                            <a href="https://www.fullyconscious.com" target="_blank" rel="noopener noreferrer" class="ct_btn-cta-secondary" style="text-decoration: none; display: flex; align-items: center; justify-content: center;">Try Our Broader Self Assessment</a>
                             <button class="ct_btn-cta-tertiary" onclick="app.handleTryAgain(event)">Try Again</button>
                         </div>
                     </div>
