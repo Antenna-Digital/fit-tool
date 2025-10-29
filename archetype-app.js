@@ -23,6 +23,7 @@ class ArchetypeAssessment {
             name: '',
             organization: '',
             role: '',
+            brandIssue: '',
             timeline: '',
             decisionMaking: '',
             innovation: '',
@@ -65,7 +66,7 @@ class ArchetypeAssessment {
     }
 
     handleStartAssessment() {
-        if (this.formData.name && this.formData.organization && this.formData.role) {
+        if (this.formData.name && this.formData.organization && this.formData.role && this.formData.brandIssue) {
             this.currentStep = 0;
             this.showError = false;
             this.render();
@@ -219,28 +220,34 @@ class ArchetypeAssessment {
         const archetypeKey = getArchetypeKey(dominants);
         const archetypeInfo = ARCHETYPE_DESCRIPTIONS[archetypeKey] || ARCHETYPE_DESCRIPTIONS[dominants[0]];
 
+        // Build responses object with nested question/answer structure
+        const responses = {};
+        QUESTIONS.forEach(q => {
+            const selectedValue = this.formData[q.id];
+            const selectedOption = q.options.find(opt => opt.value === selectedValue);
+            responses[q.id] = {
+                question: q.description,
+                answer: selectedOption ? selectedOption.label : ''
+            };
+        });
+
         const payload = {
             timestamp: new Date().toISOString(),
             userInfo: {
                 name: this.contactData.name,
                 organization: this.contactData.organization,
                 role: this.formData.role,
+                brandIssue: this.formData.brandIssue,
                 email: this.contactData.email
             },
-            responses: {
-                timeline: this.formData.timeline,
-                decisionMaking: this.formData.decisionMaking,
-                innovation: this.formData.innovation,
-                partnership: this.formData.partnership,
-                budget: this.formData.budget,
-                creative: this.formData.creative,
-                communication: this.formData.communication,
-                competitive: this.formData.competitive,
-                agencyIdeas: this.formData.agencyIdeas,
-                pastLessons: this.formData.pastLessons,
-                additional: this.formData.additional
-            },
+            responses: responses,
             scores: {
+                architect: scores.architect,
+                visionary: scores.visionary,
+                accelerator: scores.accelerator,
+                entrepreneur: scores.entrepreneur
+            },
+            scoresPercentage: {
                 architect: Math.round(scores.architect * 100),
                 visionary: Math.round(scores.visionary * 100),
                 accelerator: Math.round(scores.accelerator * 100),
@@ -281,6 +288,7 @@ class ArchetypeAssessment {
             name: '',
             organization: '',
             role: '',
+            brandIssue: '',
             timeline: '',
             decisionMaking: '',
             innovation: '',
@@ -341,6 +349,7 @@ class ArchetypeAssessment {
         params.set('name', this.formData.name);
         params.set('org', this.formData.organization);
         params.set('role', this.formData.role);
+        params.set('brandIssue', this.formData.brandIssue);
         
         // Save all responses
         params.set('timeline', this.formData.timeline);
@@ -371,6 +380,7 @@ class ArchetypeAssessment {
         this.formData.name = params.get('name') || '';
         this.formData.organization = params.get('org') || '';
         this.formData.role = params.get('role') || '';
+        this.formData.brandIssue = params.get('brandIssue') || '';
         
         // Load all responses
         this.formData.timeline = params.get('timeline') || '';
@@ -441,11 +451,22 @@ class ArchetypeAssessment {
                                 oninput="app.handleInputChange('role', this.value)"
                             />
                         </div>
+                        <div class="fit_form-group"${gsapAttr}>
+                            <label class="fit_form-label u-text-style-small">Please provide the details on the issue you wish to resolve</label>
+                            <input
+                                type="text"
+                                class="fit_form-input"
+                                data-field="brandIssue"
+                                placeholder="Describe the issue you'd like to resolve"
+                                value="${this.formData.brandIssue}"
+                                oninput="app.handleInputChange('brandIssue', this.value)"
+                            />
+                        </div>
                     </div>
 
                     ${this.showError ? `
                         <div class="fit_error-box">
-                            <p class="fit_error-text u-text-style-small">Please complete all 3 fields to continue.</p>
+                            <p class="fit_error-text u-text-style-small">Please complete all 4 fields to continue.</p>
                         </div>
                     ` : ''}
 

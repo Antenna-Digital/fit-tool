@@ -33,7 +33,7 @@
     max-width: 64rem;
     width: 100%;
     padding: var(--_spacing---space--6);
-    background-color: var(--swatch--muse);
+    background-color: transparent;
 }
 
 .fit_highlight {
