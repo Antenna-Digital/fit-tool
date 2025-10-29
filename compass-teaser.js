@@ -183,7 +183,7 @@ class CompassTeaserAssessment {
         
         // Just toggle the form visibility without re-rendering
         const contactForm = document.querySelector('.ct_contact-form');
-        const button = event.target.closest('.ct_btn-cta-primary');
+        const button = event.target.closest('.button_main_wrap');
         
         if (contactForm) {
             if (this.showContactForm) {
@@ -311,8 +311,30 @@ class CompassTeaserAssessment {
                     ${secondColumnQuestions}
                 </div>
                 
-                <div class="ct_submit-section">
-                    <button type="button" class="ct_btn-submit" onclick="app.handleShowResults(event)"${gsapAttr}>See Results</button>
+                <div class="ct_submit-section" data-gsap-hide>
+                    <div class="u-button-group">
+                        <div data-wf--button-main--style="primary" class="button_main_wrap">
+                            <div class="clickable_wrap u-cover-absolute">
+                                <button type="button" class="clickable_btn" style="display: block;" onclick="app.handleShowResults(event)">
+                                    <span class="clickable_text u-sr-only">See Results</span>
+                                </button>
+                            </div>
+                            <div class="button_main_bg u-cover-absolute"></div>
+                            <div class="button_main_icon_wrap is-optional">
+                                <div class="u-display-contents"></div>
+                            </div>
+                            <div class="button_main_text_wrap">
+                                <div aria-hidden="true" class="button_main_text u-text-style-h6 is-placeholder-text">See Results</div>
+                                <div aria-hidden="true" class="button_main_text u-text-style-h6 is-default-text">See Results</div>
+                                <div aria-hidden="true" class="button_main_text u-text-style-h6 is-hover-text">See Results</div>
+                            </div>
+                            <div class="button_main_icon_wrap is-arrow">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 18 19" fill="none" class="u-svg">
+                                    <path d="M13.7231 3.24951L2.28467 3.24951L2.28467 1.09033L17.4106 1.09033L17.4106 16.2163L15.2515 16.2163L15.2515 4.77588L1.93701 18.0894L0.410644 16.563L13.7231 3.24951Z" fill="currentColor"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         `;
@@ -367,15 +389,99 @@ class CompassTeaserAssessment {
                 
                 <div>
                     <div class="ct_cta-intro">
-                        <p class="ct_cta-intro-text u-text-style-main">This is just an introduction to brand consciousness. If you are looking to make a real impact with your brand, please either take our broader self-assessment or connect with us to discuss a brand deep dive geared toward realizing your brand's potential.</p>
-                        <div class="ct_cta-buttons">
-                            <button class="ct_btn-cta-primary ${this.showContactForm ? 'ct_active' : ''}" onclick="app.handleToggleContactForm(event)">Let's Chat</button>
-                            <a href="https://www.fullyconscious.com" target="_blank" rel="noopener noreferrer" class="ct_btn-cta-secondary" style="text-decoration: none; display: flex; align-items: center; justify-content: center;">Try Our Broader Self Assessment</a>
-                            <button class="ct_btn-cta-tertiary" onclick="app.handleTryAgain(event)">Try Again</button>
+                        <div class="ct_results-section">
+                            <h3 class="ct_results-headline u-text-style-h5">Comprehensive professional assessment using proprietary AI-driven analysis</h3>
+                            
+                            <p class="ct_cta-intro-text u-text-style-main">Our assessment evaluates your digital ecosystem across over 50 criteria, providing a clear snapshot of where your brand stands across all eight consciousness attributes.</p>
+                            
+                            <p class="ct_cta-intro-text u-text-style-main">We analyze how well your brand is optimized across social, earned, and owned channels, and evaluate its effectiveness in influencing reputation and building trust.</p>
+                            
+                            <div class="u-button-group">
+                                <div data-wf--button-main--style="primary" class="button_main_wrap ${this.showContactForm ? 'ct_active' : ''}">
+                                    <div class="clickable_wrap u-cover-absolute">
+                                        <button type="button" class="clickable_btn" onclick="app.handleToggleContactForm(event)">
+                                            <span class="clickable_text u-sr-only">Let's Chat</span>
+                                        </button>
+                                    </div>
+                                    <div class="button_main_bg u-cover-absolute"></div>
+                                    <div class="button_main_icon_wrap is-optional">
+                                        <div class="u-display-contents"></div>
+                                    </div>
+                                    <div class="button_main_text_wrap">
+                                        <div aria-hidden="true" class="button_main_text u-text-style-h6 is-placeholder-text">Let's Chat</div>
+                                        <div aria-hidden="true" class="button_main_text u-text-style-h6 is-default-text">Let's Chat</div>
+                                        <div aria-hidden="true" class="button_main_text u-text-style-h6 is-hover-text">Let's Chat</div>
+                                    </div>
+                                    <div class="button_main_icon_wrap is-arrow">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 18 19" fill="none" class="u-svg">
+                                            <path d="M13.7231 3.24951L2.28467 3.24951L2.28467 1.09033L17.4106 1.09033L17.4106 16.2163L15.2515 16.2163L15.2515 4.77588L1.93701 18.0894L0.410644 16.563L13.7231 3.24951Z" fill="currentColor"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            ${this.renderContactForm()}
+                        </div>
+                        
+                        <div class="ct_results-section">
+                            <h4 class="ct_results-headline u-text-style-h5">Evaluate your brand yourself with our guided tool.</h4>
+                            
+                            <p class="ct_cta-intro-text u-text-style-main">Ready to dig into the details on your own? Our self-assessment tool guides you through comprehensive questions across all eight attributes, providing immediate insights and actionable recommendations.</p>
+                            
+                            <div class="ct_cta-buttons-column">
+                                <div class="u-button-group">
+                                    <div data-wf--button-main--style="primary" class="button_main_wrap">
+                                        <div class="clickable_wrap u-cover-absolute">
+                                            <a target="_blank" href="https://www.fullyconscious.com" class="clickable_link w-inline-block">
+                                                <span class="clickable_text u-sr-only">Take Me To fullyconscious.com</span>
+                                            </a>
+                                            <button type="button" class="clickable_btn">
+                                                <span class="clickable_text u-sr-only">Take Me To fullyconscious.com</span>
+                                            </button>
+                                        </div>
+                                        <div class="button_main_bg u-cover-absolute"></div>
+                                        <div class="button_main_icon_wrap is-optional">
+                                            <div class="u-display-contents"></div>
+                                        </div>
+                                        <div class="button_main_text_wrap">
+                                            <div aria-hidden="true" class="button_main_text u-text-style-h6 is-placeholder-text">Take Me To fullyconscious.com</div>
+                                            <div aria-hidden="true" class="button_main_text u-text-style-h6 is-default-text">Take Me To fullyconscious.com</div>
+                                            <div aria-hidden="true" class="button_main_text u-text-style-h6 is-hover-text">Take Me To fullyconscious.com</div>
+                                        </div>
+                                        <div class="button_main_icon_wrap is-arrow">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 18 19" fill="none" class="u-svg">
+                                                <path d="M13.7231 3.24951L2.28467 3.24951L2.28467 1.09033L17.4106 1.09033L17.4106 16.2163L15.2515 16.2163L15.2515 4.77588L1.93701 18.0894L0.410644 16.563L13.7231 3.24951Z" fill="currentColor"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="u-button-group">
+                                    <div data-wf--button-main--style="primary" class="button_main_wrap">
+                                        <div class="clickable_wrap u-cover-absolute">
+                                            <button type="button" class="clickable_btn" onclick="app.handleTryAgain(event)">
+                                                <span class="clickable_text u-sr-only">Try Again</span>
+                                            </button>
+                                        </div>
+                                        <div class="button_main_bg u-cover-absolute"></div>
+                                        <div class="button_main_icon_wrap is-optional">
+                                            <div class="u-display-contents"></div>
+                                        </div>
+                                        <div class="button_main_text_wrap">
+                                            <div aria-hidden="true" class="button_main_text u-text-style-h6 is-placeholder-text">Try Again</div>
+                                            <div aria-hidden="true" class="button_main_text u-text-style-h6 is-default-text">Try Again</div>
+                                            <div aria-hidden="true" class="button_main_text u-text-style-h6 is-hover-text">Try Again</div>
+                                        </div>
+                                        <div class="button_main_icon_wrap is-arrow">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 18 19" fill="none" class="u-svg">
+                                                <path d="M13.7231 3.24951L2.28467 3.24951L2.28467 1.09033L17.4106 1.09033L17.4106 16.2163L15.2515 16.2163L15.2515 4.77588L1.93701 18.0894L0.410644 16.563L13.7231 3.24951Z" fill="currentColor"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    
-                    ${this.renderContactForm()}
                 </div>
             </div>
         `;
@@ -384,7 +490,6 @@ class CompassTeaserAssessment {
     renderContactForm() {
         return `
             <div class="ct_contact-form ${this.showContactForm ? 'ct_visible' : ''}">
-                <h3 class="u-text-style-h5">Let's Chat</h3>
                 <div class="ct_form-group">
                     <label class="u-text-style-small">Name</label>
                     <input type="text" value="${this.contactData.name}" 
@@ -408,7 +513,29 @@ class CompassTeaserAssessment {
                     <textarea oninput="app.handleContactChange('message', this.value)" 
                         placeholder="Tell us about your brand goals...">${this.contactData.message}</textarea>
                 </div>
-                <button type="button" class="ct_btn-chat" onclick="app.handleContactSubmit(event)">Submit</button>
+                <div class="u-button-group">
+                    <div data-wf--button-main--style="primary" class="button_main_wrap">
+                        <div class="clickable_wrap u-cover-absolute">
+                            <button type="button" class="clickable_btn" style="display: block;" onclick="app.handleContactSubmit(event)">
+                                <span class="clickable_text u-sr-only">Submit</span>
+                            </button>
+                        </div>
+                        <div class="button_main_bg u-cover-absolute"></div>
+                        <div class="button_main_icon_wrap is-optional">
+                            <div class="u-display-contents"></div>
+                        </div>
+                        <div class="button_main_text_wrap">
+                            <div aria-hidden="true" class="button_main_text u-text-style-h6 is-placeholder-text">Submit</div>
+                            <div aria-hidden="true" class="button_main_text u-text-style-h6 is-default-text">Submit</div>
+                            <div aria-hidden="true" class="button_main_text u-text-style-h6 is-hover-text">Submit</div>
+                        </div>
+                        <div class="button_main_icon_wrap is-arrow">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 18 19" fill="none" class="u-svg">
+                                <path d="M13.7231 3.24951L2.28467 3.24951L2.28467 1.09033L17.4106 1.09033L17.4106 16.2163L15.2515 16.2163L15.2515 4.77588L1.93701 18.0894L0.410644 16.563L13.7231 3.24951Z" fill="currentColor"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
             </div>
         `;
     }
