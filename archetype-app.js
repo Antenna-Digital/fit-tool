@@ -551,7 +551,7 @@ class ArchetypeAssessment {
         const archetypeInfo = ARCHETYPE_DESCRIPTIONS[archetypeKey] || ARCHETYPE_DESCRIPTIONS[dominants[0]];
 
 return `
-<div style="min-height: 100vh; padding: 2rem; font-family: 'Inter', sans-serif; background-color: #E5E1DA;">
+<div style="min-height: 100vh; padding: 2rem; font-family: 'Inter', sans-serif; background-color: inherit; ">
 <div class="fit_results-content" style="max-width: 96rem; margin: 0 auto;">
 <p style="font-size: 1rem; font-weight: 700; color: black; margin-bottom: 0.5rem;">
 <span class="fit_highlight"${gsapAttr}>Your results</span>
