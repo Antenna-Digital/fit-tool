@@ -168,6 +168,17 @@ class CompassTeaserAssessment {
         this.calculatedScore = this.calculateScore().avgScore;
         this.render();
         
+        // Scroll to top of app element + 120px
+        const appElement = document.getElementById('app');
+        if (appElement) {
+            const appTop = appElement.getBoundingClientRect().top + window.pageYOffset;
+            const scrollPosition = appTop - 120;
+            window.scrollTo({
+                top: scrollPosition,
+                behavior: 'smooth'
+            });
+        }
+        
         // Animate score after render
         setTimeout(() => {
             this.animateScore(this.calculatedScore);
@@ -210,16 +221,16 @@ class CompassTeaserAssessment {
         
         const { avgScore, scores } = this.calculateScore();
         
-        // Convert scores array to camelCase object
+        // Convert scores array to object with attribute names as keys
         const detailedScores = {
-            industryInfluence: scores.find(s => s.name === 'Industry Influence')?.score || 0,
-            audienceTrust: scores.find(s => s.name === 'Audience Trust')?.score || 0,
-            brandAuthenticity: scores.find(s => s.name === 'Brand Authenticity')?.score || 0,
-            contentQuality: scores.find(s => s.name === 'Content Quality')?.score || 0,
-            audienceTargeting: scores.find(s => s.name === 'Audience Targeting')?.score || 0,
-            creativeImpact: scores.find(s => s.name === 'Creative Impact')?.score || 0,
-            visionMomentum: scores.find(s => s.name === 'Vision & Momentum')?.score || 0,
-            leadershipCredibility: scores.find(s => s.name === 'Leadership Credibility')?.score || 0
+            awake: scores.find(s => s.name === 'Awake')?.score || 0,
+            aware: scores.find(s => s.name === 'Aware')?.score || 0,
+            reflective: scores.find(s => s.name === 'Reflective')?.score || 0,
+            attentive: scores.find(s => s.name === 'Attentive')?.score || 0,
+            cogent: scores.find(s => s.name === 'Cogent')?.score || 0,
+            sentient: scores.find(s => s.name === 'Sentient')?.score || 0,
+            visionary: scores.find(s => s.name === 'Visionary')?.score || 0,
+            intentional: scores.find(s => s.name === 'Intentional')?.score || 0
         };
         
         // Send contact form data with assessment results to webhook
@@ -296,11 +307,41 @@ class CompassTeaserAssessment {
         return `
             <div class="ct_assessment-view">
                 <div class="ct_header-section">
-                    <div class="ct_page-label"${gsapAttr}>HOW CONSCIOUS ARE YOU?</div>
-                    <h2 class="ct_h2 u-text-style-h2"${gsapAttr}>Perspective is everything,</h2>
-                    <div class="ct_sub-heading u-text-style-h5"${gsapAttr}>how conscious do you think your brand is?</div>
-                    <p class="ct_intro-text u-text-style-main"${gsapAttr}>Consequential brands are conscious brands.</p>
-                    <p class="ct_intro-text ct_intro-text-emphasis u-text-style-main"${gsapAttr}>Take two minutes to honestly assess where your brand stands across eight critical dimensions. Discover your score, see what's possible, then let's talk about unlocking your brand's full potential.</p>
+                    <div class="ct_page-label"${gsapAttr}>THE CONSCIOUS COMPASS</div>
+                    <h2 class="ct_h2 u-text-style-h3"${gsapAttr} style="margin-bottom: var(--_spacing---space--4);">How conscious is your brand?</h2>
+                    <p class="ct_intro-text u-text-style-main"${gsapAttr} style="margin-bottom: var(--_spacing---space--6);">Our eight-question assessment is the start; it reveals where you're leading and where opportunity awaits across eight essential brand attributes:</p>
+                    <div ${gsapAttr}>
+                    <div class="ct_intro-text_attr_list">
+                    <div>
+                    <p class="ct_intro-text_attr" ${gsapAttr}>Awake</p>
+                    <p class="ct_intro-text_attr_text u-text-style-main" ${gsapAttr}>How well do you shape narratives and lead industry discourse?</span></p>
+                    </div>
+                    <div>
+                    <p class="ct_intro-text_attr" ${gsapAttr}>Aware</p>
+                    <p class="ct_intro-text_attr_text u-text-style-main" ${gsapAttr}>Do you understand audiences and build trust?</span></p>
+                    </div>
+                    <div>
+                    <p class="ct_intro-text_attr" ${gsapAttr}>Reflective</p>
+                    <p class="ct_intro-text_attr_text u-text-style-main" ${gsapAttr}>Do you have an authentic brand?</span></p>
+                    </div>
+                    <div>
+                    <p class="ct_intro-text_attr" ${gsapAttr}>Attentive</p>
+                    <p class="ct_intro-text_attr_text u-text-style-main" ${gsapAttr}>Do you deliver exceptional, consistent experiences?</span></p>
+                    </div>
+                    <div>
+                    <p class="ct_intro-text_attr" ${gsapAttr}>Cogent</p>
+                    <p class="ct_intro-text_attr_text u-text-style-main" ${gsapAttr}>Is your marketing driven by strategic insights and data?</span></p>
+                    </div>
+                    <div>
+                    <p class="ct_intro-text_attr" ${gsapAttr}>Sentient</p>
+                    <p class="ct_intro-text_attr_text u-text-style-main" ${gsapAttr}>How well do you create emotional connections that inspire action?</span></p>
+                    </div>
+                    <div>
+                    <p class="ct_intro-text_attr" ${gsapAttr}>Intentional</p>
+                    <p class="ct_intro-text_attr_text u-text-style-main" ${gsapAttr}>Do you show up with substance, confidence, and leadership?</span></p>
+                    </div>
+                    </div>
+                </div>
                 </div>
                 
                 <div class="ct_questions-column">
@@ -377,6 +418,7 @@ class CompassTeaserAssessment {
         const description = this.getScoreDescription(avgScore, scores);
         
         return `
+        
             <div class="ct_results-view ct_active">
                 <div class="ct_results-left">
                     <div class="ct_page-label">WHAT IS THIS TELLING US?</div>
@@ -389,44 +431,14 @@ class CompassTeaserAssessment {
                 
                 <div>
                     <div class="ct_cta-intro">
-                        <div class="ct_results-section">
-                            <h3 class="ct_results-headline u-text-style-h5">Comprehensive professional assessment using proprietary AI-driven analysis</h3>
-                            
-                            <p class="ct_cta-intro-text u-text-style-main">Our assessment evaluates your digital ecosystem across over 50 criteria, providing a clear snapshot of where your brand stands across all eight consciousness attributes.</p>
-                            
-                            <p class="ct_cta-intro-text u-text-style-main">We analyze how well your brand is optimized across social, earned, and owned channels, and evaluate its effectiveness in influencing reputation and building trust.</p>
-                            
-                            <div class="u-button-group">
-                                <div data-wf--button-main--style="primary" class="button_main_wrap ${this.showContactForm ? 'ct_active' : ''}">
-                                    <div class="clickable_wrap u-cover-absolute">
-                                        <button type="button" class="clickable_btn" onclick="app.handleToggleContactForm(event)">
-                                            <span class="clickable_text u-sr-only">Let's Chat</span>
-                                        </button>
-                                    </div>
-                                    <div class="button_main_bg u-cover-absolute"></div>
-                                    <div class="button_main_icon_wrap is-optional">
-                                        <div class="u-display-contents"></div>
-                                    </div>
-                                    <div class="button_main_text_wrap">
-                                        <div aria-hidden="true" class="button_main_text u-text-style-h6 is-placeholder-text">Let's Chat</div>
-                                        <div aria-hidden="true" class="button_main_text u-text-style-h6 is-default-text">Let's Chat</div>
-                                        <div aria-hidden="true" class="button_main_text u-text-style-h6 is-hover-text">Let's Chat</div>
-                                    </div>
-                                    <div class="button_main_icon_wrap is-arrow">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 18 19" fill="none" class="u-svg">
-                                            <path d="M13.7231 3.24951L2.28467 3.24951L2.28467 1.09033L17.4106 1.09033L17.4106 16.2163L15.2515 16.2163L15.2515 4.77588L1.93701 18.0894L0.410644 16.563L13.7231 3.24951Z" fill="currentColor"></path>
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            ${this.renderContactForm()}
+                        <div>
+                            <h3 class="u-text-style-h4 u-mb-6">Ready to go deeper?</h3>
+                            <p class="u-text-style-main">Two more ways to discover where your brand’s clarity, courage, and consequence can grow.</p>
                         </div>
-                        
                         <div class="ct_results-section">
-                            <h4 class="ct_results-headline u-text-style-h5">Evaluate your brand yourself with our guided tool.</h4>
+                            <h4 class="ct_results-headline u-text-style-h5">Self-Assessment at FullyConscious.com</h4>
                             
-                            <p class="ct_cta-intro-text u-text-style-main">Ready to dig into the details on your own? Our self-assessment tool guides you through comprehensive questions across all eight attributes, providing immediate insights and actionable recommendations.</p>
+                            <p class="ct_cta-intro-text u-text-style-main">Assess your brand’s consciousness. This guided experience measures your performance across eight defining attributes and delivers actionable insights to strengthen strategy, storytelling, and impact.</p>
                             
                             <div class="ct_cta-buttons-column">
                                 <div class="u-button-group">
@@ -454,9 +466,6 @@ class CompassTeaserAssessment {
                                             </svg>
                                         </div>
                                     </div>
-                                </div>
-                                
-                                <div class="u-button-group">
                                     <div data-wf--button-main--style="primary" class="button_main_wrap">
                                         <div class="clickable_wrap u-cover-absolute">
                                             <button type="button" class="clickable_btn" onclick="app.handleTryAgain(event)">
@@ -479,7 +488,39 @@ class CompassTeaserAssessment {
                                         </div>
                                     </div>
                                 </div>
+                                
                             </div>
+                        </div>
+                        <div class="ct_results-section">
+                            <h3 class="ct_results-headline u-text-style-h5">Comprehensive assessment powered by proprietary AI analysis.</h3>
+                            
+                            <p class="ct_cta-intro-text u-text-style-main">Partner with our team for a full-scale evaluation of your brand’s digital ecosystem. Using AI-driven analysis across 50+ criteria, we analyze how well your brand is optimized across social, earned, and owned channels—and evaluate its effectiveness in influencing reputation and building trust. Then, we deliver a clear snapshot of how your brand performs across all eight consciousness attributes, and where it can grow. </p>
+                            
+                            <div class="u-button-group">
+                                <div data-wf--button-main--style="primary" class="button_main_wrap ${this.showContactForm ? 'ct_active' : ''}">
+                                    <div class="clickable_wrap u-cover-absolute">
+                                        <button type="button" class="clickable_btn" onclick="app.handleToggleContactForm(event)">
+                                            <span class="clickable_text u-sr-only">Let's Chat</span>
+                                        </button>
+                                    </div>
+                                    <div class="button_main_bg u-cover-absolute"></div>
+                                    <div class="button_main_icon_wrap is-optional">
+                                        <div class="u-display-contents"></div>
+                                    </div>
+                                    <div class="button_main_text_wrap">
+                                        <div aria-hidden="true" class="button_main_text u-text-style-h6 is-placeholder-text">Let's Chat</div>
+                                        <div aria-hidden="true" class="button_main_text u-text-style-h6 is-default-text">Let's Chat</div>
+                                        <div aria-hidden="true" class="button_main_text u-text-style-h6 is-hover-text">Let's Chat</div>
+                                    </div>
+                                    <div class="button_main_icon_wrap is-arrow">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 18 19" fill="none" class="u-svg">
+                                            <path d="M13.7231 3.24951L2.28467 3.24951L2.28467 1.09033L17.4106 1.09033L17.4106 16.2163L15.2515 16.2163L15.2515 4.77588L1.93701 18.0894L0.410644 16.563L13.7231 3.24951Z" fill="currentColor"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            ${this.renderContactForm()}
                         </div>
                     </div>
                 </div>

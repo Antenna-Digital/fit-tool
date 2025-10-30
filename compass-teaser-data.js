@@ -3,7 +3,7 @@
 
 const COMPASS_QUESTIONS = [
     {
-        id: 'q1',
+        id: 'awake',
         text: 'How effectively does your brand influence industry conversations?',
         labels: [
             'No influence',
@@ -14,7 +14,7 @@ const COMPASS_QUESTIONS = [
         ]
     },
     {
-        id: 'q2',
+        id: 'aware',
         text: 'How deeply does your brand understand and build trust with audiences?',
         labels: [
             'Disconnected',
@@ -25,7 +25,7 @@ const COMPASS_QUESTIONS = [
         ]
     },
     {
-        id: 'q3',
+        id: 'reflective',
         text: 'How authentic is your brand promise when compared to reality?',
         labels: [
             'Inauthentic',
@@ -36,7 +36,7 @@ const COMPASS_QUESTIONS = [
         ]
     },
     {
-        id: 'q4',
+        id: 'attentive',
         text: 'How exceptional is the quality of your content and brand experience?',
         labels: [
             'Poor quality',
@@ -47,7 +47,7 @@ const COMPASS_QUESTIONS = [
         ]
     },
     {
-        id: 'q5',
+        id: 'cogent',
         text: 'How targeted is your brand for your audiences and channels?',
         labels: [
             'No segmentation',
@@ -58,7 +58,7 @@ const COMPASS_QUESTIONS = [
         ]
     },
     {
-        id: 'q6',
+        id: 'sentient',
         text: 'How effectively does your brand\'s creative inspire action among your target audience?',
         labels: [
             'No creative',
@@ -69,7 +69,7 @@ const COMPASS_QUESTIONS = [
         ]
     },
     {
-        id: 'q7',
+        id: 'visionary',
         text: 'How clear is your future vision, and how visible is your momentum?',
         labels: [
             'No vision',
@@ -80,7 +80,7 @@ const COMPASS_QUESTIONS = [
         ]
     },
     {
-        id: 'q8',
+        id: 'intentional',
         text: 'What is the perception of the credibility of your leadership team?',
         labels: [
             'Weak',
@@ -101,14 +101,14 @@ const SCORE_MAP = {
 };
 
 const ATTRIBUTE_NAMES = {
-    q1: 'Industry Influence',
-    q2: 'Audience Trust',
-    q3: 'Brand Authenticity',
-    q4: 'Content Quality',
-    q5: 'Audience Targeting',
-    q6: 'Creative Impact',
-    q7: 'Vision & Momentum',
-    q8: 'Leadership Credibility'
+    awake: 'Awake',
+    aware: 'Aware',
+    reflective: 'Reflective',
+    attentive: 'Attentive',
+    cogent: 'Cogent',
+    sentient: 'Sentient',
+    visionary: 'Visionary',
+    intentional: 'Intentional'
 };
 
 const SCORE_DESCRIPTIONS = {
