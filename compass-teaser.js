@@ -487,7 +487,7 @@ class CompassTeaserAssessment {
                                             <a target="_blank" href="https://www.fullyconscious.com" class="clickable_link w-inline-block">
                                                 <span class="clickable_text u-sr-only">Take Me To fullyconscious.com</span>
                                             </a>
-                                            <button type="button" class="clickable_btn clickable_btn.clickable_btn--hide">
+                                            <button type="button" class="clickable_btn clickable_btn--hide">
                                                 <span class="clickable_text u-sr-only">Take Me To fullyconscious.com</span>
                                             </button>
                                         </div>
