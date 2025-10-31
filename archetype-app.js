@@ -23,6 +23,7 @@ class ArchetypeAssessment {
             name: '',
             organization: '',
             role: '',
+            email: '',
             brandIssue: '',
             timeline: '',
             decisionMaking: '',
@@ -61,12 +62,18 @@ class ArchetypeAssessment {
         this.formData[field] = value;
         const wasShowingError = this.showError;
         this.showError = false;
-        // Re-render to update the UI (show selection and enable/disable buttons)
-        this.render();
+        
+        // Check if this is a question answer (not a text input field)
+        const isQuestionAnswer = !['name', 'organization', 'role', 'email', 'brandIssue'].includes(field);
+        
+        // Re-render if it's a question answer or if we need to hide the error message
+        if (isQuestionAnswer || wasShowingError) {
+            this.render();
+        }
     }
 
     handleStartAssessment() {
-        if (this.formData.name && this.formData.organization && this.formData.role && this.formData.brandIssue) {
+        if (this.formData.name && this.formData.organization && this.formData.role && this.formData.email && this.formData.brandIssue) {
             this.currentStep = 0;
             this.showError = false;
             this.render();
@@ -85,15 +92,27 @@ class ArchetypeAssessment {
             this.render();
             this.startScoreAnimation();
             this.saveResultsToUrl();
-            // Don't send to n8n yet - wait for contact form submission
+            // Send results to Smartsheet when showing results
+            this.sendResultsToSmartsheet();
         }
     }
 
-    async sendResultsToN8n() {
+    async sendResultsToSmartsheet() {
         const scores = calculateScores(this.formData);
         const dominants = getDominantArchetype(scores);
         const archetypeKey = getArchetypeKey(dominants);
         const archetypeInfo = ARCHETYPE_DESCRIPTIONS[archetypeKey] || ARCHETYPE_DESCRIPTIONS[dominants[0]];
+
+        // Build responses object with nested question/answer structure
+        const responses = {};
+        QUESTIONS.forEach(q => {
+            const selectedValue = this.formData[q.id];
+            const selectedOption = q.options.find(opt => opt.value === selectedValue);
+            responses[q.id] = {
+                question: q.description,
+                answer: selectedOption ? selectedOption.label : ''
+            };
+        });
 
         const payload = {
             timestamp: new Date().toISOString(),
@@ -101,22 +120,17 @@ class ArchetypeAssessment {
                 name: this.formData.name,
                 organization: this.formData.organization,
                 role: this.formData.role,
-                email: this.contactData.email || ''
+                brandIssue: this.formData.brandIssue,
+                email: this.formData.email
             },
-            responses: {
-                timeline: this.formData.timeline,
-                decisionMaking: this.formData.decisionMaking,
-                innovation: this.formData.innovation,
-                partnership: this.formData.partnership,
-                budget: this.formData.budget,
-                creative: this.formData.creative,
-                communication: this.formData.communication,
-                competitive: this.formData.competitive,
-                agencyIdeas: this.formData.agencyIdeas,
-                pastLessons: this.formData.pastLessons,
-                additional: this.formData.additional
-            },
+            responses: responses,
             scores: {
+                architect: scores.architect,
+                visionary: scores.visionary,
+                accelerator: scores.accelerator,
+                entrepreneur: scores.entrepreneur
+            },
+            scoresPercentage: {
                 architect: Math.round(scores.architect * 100),
                 visionary: Math.round(scores.visionary * 100),
                 accelerator: Math.round(scores.accelerator * 100),
@@ -126,12 +140,15 @@ class ArchetypeAssessment {
                 dominantArchetypes: dominants,
                 archetypeKey: archetypeKey,
                 title: archetypeInfo.title,
-                description: archetypeInfo.description
-            }
+                description: archetypeInfo.description,
+                resultsUrl: window.location.href
+            },
+            contactFormSubmitted: false
         };
 
         try {
-            const response = await fetch('https://antennagroup.app.n8n.cloud/webhook-test/f72055be-200b-439d-91cd-150df843b74f', {
+            const webhookUrl = this.getWebhookUrl();
+            const response = await fetch(webhookUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -140,12 +157,12 @@ class ArchetypeAssessment {
             });
 
             if (response.ok) {
-                console.log('Results successfully sent to n8n:', payload);
+                console.log('Results successfully sent to Smartsheet:', payload);
             } else {
-                console.error('Failed to send results to n8n:', response.status, response.statusText);
+                console.error('Failed to send results to Smartsheet:', response.status, response.statusText);
             }
         } catch (error) {
-            console.error('Error sending results to n8n:', error);
+            console.error('Error sending results to Smartsheet:', error);
         }
     }
 
@@ -238,7 +255,7 @@ class ArchetypeAssessment {
                 organization: this.contactData.organization,
                 role: this.formData.role,
                 brandIssue: this.formData.brandIssue,
-                email: this.contactData.email
+                email: this.formData.email || this.contactData.email
             },
             responses: responses,
             scores: {
@@ -288,6 +305,7 @@ class ArchetypeAssessment {
             name: '',
             organization: '',
             role: '',
+            email: '',
             brandIssue: '',
             timeline: '',
             decisionMaking: '',
@@ -311,6 +329,12 @@ class ArchetypeAssessment {
         // Clear URL parameters
         window.history.pushState({}, '', window.location.pathname);
         this.render();
+        
+        // Scroll to top of the page
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     }
 
     toggleContactForm() {
@@ -452,21 +476,31 @@ class ArchetypeAssessment {
                             />
                         </div>
                         <div class="fit_form-group"${gsapAttr}>
-                            <label class="fit_form-label u-text-style-small">Please provide the details on the issue you wish to resolve</label>
+                            <label class="fit_form-label u-text-style-small">Email</label>
                             <input
-                                type="text"
+                                type="email"
+                                class="fit_form-input"
+                                data-field="email"
+                                placeholder="your.email@example.com"
+                                value="${this.formData.email}"
+                                oninput="app.handleInputChange('email', this.value)"
+                            />
+                        </div>
+                        <div class="fit_form-group"${gsapAttr}>
+                            <label class="fit_form-label u-text-style-small">What does success look like for your agency relationship?</label>
+                            <textarea
+                                rows="2"
                                 class="fit_form-input"
                                 data-field="brandIssue"
                                 placeholder="Describe the issue you'd like to resolve"
-                                value="${this.formData.brandIssue}"
                                 oninput="app.handleInputChange('brandIssue', this.value)"
-                            />
+                            >${this.formData.brandIssue}</textarea>
                         </div>
                     </div>
 
                     ${this.showError ? `
                         <div class="fit_error-box">
-                            <p class="fit_error-text u-text-style-small">Please complete all 4 fields to continue.</p>
+                            <p class="fit_error-text u-text-style-small">Please complete all 5 fields to continue.</p>
                         </div>
                     ` : ''}
 
@@ -563,9 +597,6 @@ Thank you for sharing what you value most in an agency relationship.
 <p class="fit_text-small u-text-style-main"${gsapAttr} style="margin-bottom: 2rem;">
 Below is a summary of what we have learnt.
 </p>
-                    <p class="fit_text-small u-text-style-main"${gsapAttr} style="margin-bottom: 2rem;">
-                        Below is a summary of what we have learnt.
-                    </p>
 
                     <div class="fit_quadrant-container">
                         <svg class="fit_diagonal-lines">

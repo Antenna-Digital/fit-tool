@@ -37,9 +37,7 @@
 }
 
 .fit_highlight {
-    background: var(--swatch--sunglow);
     color: var(--swatch--dark-900);
-    padding: 1px 2px;
     text-transform: uppercase;
     display: inline-block;
     font-weight: var(--_typography---font--primary-medium);
@@ -84,8 +82,8 @@
 
 .fit_button-swipe {
     font-family: var(--_typography---font--primary-family);
-    font-size: var(--_typography---font-size--text-large);
-    font-weight: var(--_typography---font--primary-bold);
+    font-size: var(--_typography---font-size--text-main);
+    font-weight: var(--_typography---font--primary-medium);
     letter-spacing: var(--_typography---letter-spacing--0em);
     position: relative;
     overflow: hidden;
@@ -96,9 +94,14 @@
     padding: var(--_spacing---space--3) var(--_spacing---space--5);
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: var(--_spacing---space--1);
     border: 2px solid var(--swatch--dark-900);
     color: var(--swatch--dark-900);
+}
+.fit_option-text::before, .fit_option-text::after {
+    display: none !important;
+    content: none !important;
 }
 
 .fit_button-swipe svg {
@@ -124,7 +127,6 @@
 
 .fit_button-swipe:hover {
     color: var(--swatch--dark-900);
-    border-color: var(--swatch--sunglow);
 }
 
 .fit_button-swipe:disabled {

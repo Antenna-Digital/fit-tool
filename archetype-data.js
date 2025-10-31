@@ -8,9 +8,9 @@ const QUESTIONS = [
         description: 'When do you consider a project successful?',
         options: [
             { value: 'strategic', label: 'When our strategic objectives are met', archetype: 'architect' },
-            { value: 'breakthrough', label: 'When we achieve authentic breakthrough/ when our industry recognizes our value', archetype: 'visionary' },
+            { value: 'breakthrough', label: 'When we achieve authentic breakthrough/when our industry recognizes our value', archetype: 'visionary' },
             { value: 'kpis', label: 'When we hit measurable KPIs', archetype: 'accelerator' },
-            { value: 'quickWins', label: 'Quick wins while we scale/ when our revenue increases', archetype: 'entrepreneur' }
+            { value: 'quickWins', label: 'Quick wins while we scale/when our revenue increases', archetype: 'entrepreneur' }
         ]
     },
     {
@@ -18,10 +18,10 @@ const QUESTIONS = [
         question: 'Decision-Making Authority',
         description: 'How are decisions typically made?',
         options: [
-            { value: 'formal', label: 'Board/committee approval/ formal process', archetype: 'architect' },
-            { value: 'vision', label: 'I decide based on creative vision/ quality of ideas', archetype: 'visionary' },
+            { value: 'formal', label: 'Board/committee approval/formal process', archetype: 'architect' },
+            { value: 'vision', label: 'I decide based on creative vision/quality of ideas', archetype: 'visionary' },
             { value: 'data', label: 'Data justifies each decision', archetype: 'accelerator' },
-            { value: 'quick', label: 'My call/ quick team consensus', archetype: 'entrepreneur' }
+            { value: 'quick', label: 'My call/quick team consensus', archetype: 'entrepreneur' }
         ]
     },
     {
@@ -29,9 +29,9 @@ const QUESTIONS = [
         question: 'Innovation & Risk Approach',
         description: 'How do you approach new ideas and risk?',
         options: [
-            { value: 'proven', label: 'Proven strategies with careful testing/ risk mitigation', archetype: 'architect' },
-            { value: 'breakthrough', label: 'Love breakthrough creative/ willing to be first', archetype: 'visionary' },
-            { value: 'test', label: 'Test small, scale proven winners/ measured experimentation', archetype: 'accelerator' },
+            { value: 'proven', label: 'Proven strategies with careful testing/risk mitigation', archetype: 'architect' },
+            { value: 'breakthrough', label: 'Love breakthrough creative/willing to be first', archetype: 'visionary' },
+            { value: 'test', label: 'Test small, scale proven winners/measured experimentation', archetype: 'accelerator' },
             { value: 'fast', label: 'Move fast, fail cheap', archetype: 'entrepreneur' }
         ]
     },
@@ -40,9 +40,9 @@ const QUESTIONS = [
         question: 'Proactive Partnership Expectations',
         description: 'What do you expect from agency partners?',
         options: [
-            { value: 'strategic', label: 'Ongoing strategic recommendations/ regular strategic insights', archetype: 'architect' },
-            { value: 'creative', label: 'Constant creative inspiration/ proactive breakthrough opportunities', archetype: 'visionary' },
-            { value: 'optimization', label: 'Proactive performance optimization ideas/ efficiency improvements', archetype: 'accelerator' },
+            { value: 'strategic', label: 'Ongoing strategic recommendations/regular strategic insights', archetype: 'architect' },
+            { value: 'creative', label: 'Constant creative inspiration/proactive breakthrough opportunities', archetype: 'visionary' },
+            { value: 'optimization', label: 'Proactive performance optimization ideas/efficiency improvements', archetype: 'accelerator' },
             { value: 'growth', label: 'Growth tactics/whatever helps us move faster', archetype: 'entrepreneur' }
         ]
     },
@@ -51,9 +51,9 @@ const QUESTIONS = [
         question: 'Budget Philosophy & Flexibility',
         description: 'How do you approach budget allocation?',
         options: [
-            { value: 'planned', label: 'Annual strategic allocation/ planned budget categories only', archetype: 'architect' },
-            { value: 'bigIdeas', label: 'Invest in big ideas/ we\'re flexible for the right opportunities', archetype: 'visionary' },
-            { value: 'performance', label: 'Performance-justified spend/ we allocate based on results', archetype: 'accelerator' },
+            { value: 'planned', label: 'Annual strategic allocation/planned budget categories only', archetype: 'architect' },
+            { value: 'bigIdeas', label: 'Invest in big ideas/we\'re flexible for the right opportunities', archetype: 'visionary' },
+            { value: 'performance', label: 'Performance-justified spend/we allocate based on results', archetype: 'accelerator' },
             { value: 'scale', label: 'Test budgets that scale/double down on what works', archetype: 'entrepreneur' }
         ]
     },
@@ -63,9 +63,9 @@ const QUESTIONS = [
         description: 'How important are brand guidelines?',
         options: [
             { value: 'compliance', label: 'Brand compliance/consistency is critical', archetype: 'architect' },
-            { value: 'push', label: 'Push creative boundaries/ be authentic to our brand and culture', archetype: 'visionary' },
-            { value: 'conversion', label: 'Creative focused on conversion/ performance-driven creativity', archetype: 'accelerator' },
-            { value: 'works', label: 'Whatever works/ respond to the market', archetype: 'entrepreneur' }
+            { value: 'push', label: 'Push creative boundaries/be authentic to our brand and culture', archetype: 'visionary' },
+            { value: 'conversion', label: 'Creative focused on conversion/performance-driven creativity', archetype: 'accelerator' },
+            { value: 'works', label: 'Whatever works/respond to the market', archetype: 'entrepreneur' }
         ]
     },
     {
@@ -73,10 +73,10 @@ const QUESTIONS = [
         question: 'Communication & Reporting Style',
         description: 'How do you prefer to communicate with partners?',
         options: [
-            { value: 'formal', label: 'Formal reports and reviews/ documented progress', archetype: 'architect' },
-            { value: 'creative', label: 'Creative journey sharing/ collaborative check-ins', archetype: 'visionary' },
-            { value: 'dashboards', label: 'Performance dashboards/ optimization reports', archetype: 'accelerator' },
-            { value: 'quick', label: 'Quick updates/ real-time communication', archetype: 'entrepreneur' }
+            { value: 'formal', label: 'Formal reports and reviews/documented progress', archetype: 'architect' },
+            { value: 'creative', label: 'Creative journey sharing/collaborative check-ins', archetype: 'visionary' },
+            { value: 'dashboards', label: 'Performance dashboards/optimization reports', archetype: 'accelerator' },
+            { value: 'quick', label: 'Quick updates/real-time communication', archetype: 'entrepreneur' }
         ]
     },
     {
@@ -84,10 +84,10 @@ const QUESTIONS = [
         question: 'Competitive Urgency & Market Pressure',
         description: 'What drives your competitive strategy?',
         options: [
-            { value: 'positioning', label: 'Strategic market positioning/ competitive differentiation', archetype: 'architect' },
-            { value: 'cultural', label: 'Cultural relevance/ authentic brand evolution', archetype: 'visionary' },
-            { value: 'metrics', label: 'Measurable market share gains/ clear competitive metrics', archetype: 'accelerator' },
-            { value: 'window', label: 'Market window closing/ competitor threat', archetype: 'entrepreneur' }
+            { value: 'positioning', label: 'Strategic market positioning/competitive differentiation', archetype: 'architect' },
+            { value: 'cultural', label: 'Cultural relevance/authentic brand evolution', archetype: 'visionary' },
+            { value: 'metrics', label: 'Measurable market share gains/clear competitive metrics', archetype: 'accelerator' },
+            { value: 'window', label: 'Market window closing/competitor threat', archetype: 'entrepreneur' }
         ]
     },
     {
@@ -95,10 +95,10 @@ const QUESTIONS = [
         question: 'Agency Ideas & Initiative',
         description: 'What kind of ideas do you value from agencies?',
         options: [
-            { value: 'strategic', label: 'Strategic counsel with proven approaches/ thoughtful recommendations', archetype: 'architect' },
-            { value: 'breakthrough', label: 'Challenge us creatively/ bring breakthrough ideas', archetype: 'visionary' },
-            { value: 'optimization', label: 'Optimization ideas and efficiency improvements/ data-backed recommendations', archetype: 'accelerator' },
-            { value: 'results', label: 'Whatever drives results/ growth-focused ideas', archetype: 'entrepreneur' }
+            { value: 'strategic', label: 'Strategic counsel with proven approaches/thoughtful recommendations', archetype: 'architect' },
+            { value: 'breakthrough', label: 'Challenge us creatively/bring breakthrough ideas', archetype: 'visionary' },
+            { value: 'optimization', label: 'Optimization ideas and efficiency improvements/data-backed recommendations', archetype: 'accelerator' },
+            { value: 'results', label: 'Whatever drives results/growth-focused ideas', archetype: 'entrepreneur' }
         ]
     },
     {
@@ -106,9 +106,9 @@ const QUESTIONS = [
         question: 'Past Agency Relationship Lessons',
         description: 'What have been pain points with past agencies?',
         options: [
-            { value: 'process', label: 'Process failures/ lack of strategic insight', archetype: 'architect' },
-            { value: 'mediocrity', label: 'Creative mediocrity/ failure to understand you', archetype: 'visionary' },
-            { value: 'performance', label: 'Performance gaps/ missing transparency', archetype: 'accelerator' },
+            { value: 'process', label: 'Process failures/lack of strategic insight', archetype: 'architect' },
+            { value: 'mediocrity', label: 'Creative mediocrity/failure to understand you', archetype: 'visionary' },
+            { value: 'performance', label: 'Performance gaps/missing transparency', archetype: 'accelerator' },
             { value: 'slow', label: 'Slowness and rigidity', archetype: 'entrepreneur' }
         ]
     }

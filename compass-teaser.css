@@ -68,7 +68,7 @@
     content: none !important;
 }
 .ct_page-label {
-    background: var(--swatch--sunglow);
+    background: transparent;
     color: var(--swatch--dark-900);
     padding: 1px 2px;
     text-transform: uppercase;
@@ -294,6 +294,10 @@
     display: flex;
     flex-direction: column;
     gap: var(--_spacing---space--4);
+}
+
+.ct_cta-buttons-column .button_main_wrap {
+    width: 100%;
 }
 .ct_cta-intro {
     background: var(--swatch--light-100);

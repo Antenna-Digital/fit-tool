@@ -161,7 +161,7 @@ class CompassTeaserAssessment {
         }
     }
 
-    handleShowResults(event) {
+    async handleShowResults(event) {
         if (event) event.preventDefault();
         
         this.showResults = true;
@@ -184,7 +184,41 @@ class CompassTeaserAssessment {
             this.animateScore(this.calculatedScore);
         }, 300);
         
-        // Note: Webhook is only sent when user submits the contact form
+        // Send assessment results to Smartsheet via webhook
+        await this.sendAssessmentToSmartsheet();
+    }
+    
+    async sendAssessmentToSmartsheet() {
+        const { avgScore, scores } = this.calculateScore();
+        
+        // Convert scores array to object with attribute names as keys
+        const detailedScores = {
+            awake: scores.find(s => s.name === 'Awake')?.score || 0,
+            aware: scores.find(s => s.name === 'Aware')?.score || 0,
+            reflective: scores.find(s => s.name === 'Reflective')?.score || 0,
+            attentive: scores.find(s => s.name === 'Attentive')?.score || 0,
+            cogent: scores.find(s => s.name === 'Cogent')?.score || 0,
+            sentient: scores.find(s => s.name === 'Sentient')?.score || 0,
+            visionary: scores.find(s => s.name === 'Visionary')?.score || 0,
+            intentional: scores.find(s => s.name === 'Intentional')?.score || 0
+        };
+        
+        // Send assessment data to Smartsheet
+        const payload = {
+            timestamp: new Date().toISOString(),
+            assessmentType: 'compass-teaser',
+            contactFormSubmitted: false,
+            score: avgScore,
+            responses: this.sliderValues,
+            detailedScores: detailedScores
+        };
+        
+        try {
+            await this.sendToWebhook(payload);
+            console.log('Assessment results sent to Smartsheet');
+        } catch (error) {
+            console.error('Error sending assessment to Smartsheet:', error);
+        }
     }
 
     handleToggleContactForm(event) {
@@ -276,6 +310,12 @@ class CompassTeaserAssessment {
         this.contactData = { name: '', email: '', company: '', message: '' };
         
         this.render();
+        
+        // Scroll to top of the page
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     }
 
     renderAssessmentView() {
@@ -286,7 +326,7 @@ class CompassTeaserAssessment {
             const value = this.sliderValues[q.id];
             
             return `
-                <div class="ct_question-group"${gsapAttr}>
+                <div class="ct_question-group" ${gsapAttr}>
                     <div class="ct_question-text">${q.text}</div>
                     <div class="ct_slider-container">
                         <input type="range" min="1" max="5" value="${value}" class="ct_slider" id="${q.id}"
@@ -352,7 +392,7 @@ class CompassTeaserAssessment {
                     ${secondColumnQuestions}
                 </div>
                 
-                <div class="ct_submit-section" data-gsap-hide>
+                <div class="ct_submit-section"${gsapAttr}>
                     <div class="u-button-group">
                         <div data-wf--button-main--style="primary" class="button_main_wrap">
                             <div class="clickable_wrap u-cover-absolute">
@@ -550,7 +590,7 @@ class CompassTeaserAssessment {
                         placeholder="Your company" required>
                 </div>
                 <div class="ct_form-group">
-                    <label class="u-text-style-small">Message</label>
+                    <label class="u-text-style-small">What does success look like for your agency relationship?</label>
                     <textarea oninput="app.handleContactChange('message', this.value)" 
                         placeholder="Tell us about your brand goals...">${this.contactData.message}</textarea>
                 </div>
