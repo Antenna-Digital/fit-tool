@@ -592,7 +592,7 @@ class CompassTeaserAssessment {
                 <div class="ct_form-group">
                     <label class="u-text-style-small">What does success look like for your agency relationship?</label>
                     <textarea oninput="app.handleContactChange('message', this.value)" 
-                        placeholder="Tell us about your brand goals...">${this.contactData.message}</textarea>
+                        placeholder="What does success look like for your agency relationship?">${this.contactData.message}</textarea>
                 </div>
                 <div class="u-button-group">
                     <div data-wf--button-main--style="primary" class="button_main_wrap">

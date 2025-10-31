@@ -492,7 +492,7 @@ class ArchetypeAssessment {
                                 rows="2"
                                 class="fit_form-input"
                                 data-field="brandIssue"
-                                placeholder="Describe the issue you'd like to resolve"
+                                placeholder="What does success look like for your agency relationship?"
                                 oninput="app.handleInputChange('brandIssue', this.value)"
                             >${this.formData.brandIssue}</textarea>
                         </div>
