@@ -675,14 +675,6 @@ Below is a summary of what we have learnt.
                         </a>
                         
                         <button
-                            onclick="app.toggleContactForm()"
-                            class="fit_button-swipe"
-                            ${gsapAttr}
-                        >
-                            <span>${this.showContactForm ? 'Hide Contact Form' : 'Talk To Us'}</span>
-                        </button>
-                        
-                        <button
                             onclick="app.handleReset()"
                             class="fit_button-swipe"
                             ${gsapAttr}
@@ -691,8 +683,6 @@ Below is a summary of what we have learnt.
                             <span>Try Again</span>
                         </button>
                     </div>
-
-                    ${this.showContactForm ? this.renderContactForm() : ''}
                 </div>
             </div>
         `;

@@ -248,8 +248,12 @@
     display: grid;
     animation: ct_fadeIn 0.5s ease;
 }
+
 .ct_results-section .clickable_btn {
     display: block;
+}
+.ct_results-section .clickable_btn.clickable_btn--hide {
+    display: none;
 }
 
 @keyframes ct_fadeIn {
@@ -296,9 +300,6 @@
     gap: var(--_spacing---space--4);
 }
 
-.ct_cta-buttons-column .button_main_wrap {
-    width: 100%;
-}
 .ct_cta-intro {
     background: var(--swatch--light-100);
     padding: var(--_spacing---space--7);
