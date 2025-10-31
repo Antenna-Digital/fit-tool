@@ -168,11 +168,11 @@ class CompassTeaserAssessment {
         this.calculatedScore = this.calculateScore().avgScore;
         this.render();
         
-        // Scroll to top of app element + 120px
-        const appElement = document.getElementById('app');
-        if (appElement) {
-            const appTop = appElement.getBoundingClientRect().top + window.pageYOffset;
-            const scrollPosition = appTop - 120;
+        // Scroll to top of conscious-compass-teaser_wrap element + 120px
+        const wrapElement = document.querySelector('.conscious-compass-teaser_wrap');
+        if (wrapElement) {
+            const wrapTop = wrapElement.getBoundingClientRect().top + window.pageYOffset;
+            const scrollPosition = wrapTop - 120;
             window.scrollTo({
                 top: scrollPosition,
                 behavior: 'smooth'
@@ -311,11 +311,16 @@ class CompassTeaserAssessment {
         
         this.render();
         
-        // Scroll to top of the page
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
+        // Scroll to top of conscious-compass-teaser_wrap element + 120px
+        const wrapElement = document.querySelector('.conscious-compass-teaser_wrap');
+        if (wrapElement) {
+            const wrapTop = wrapElement.getBoundingClientRect().top + window.pageYOffset;
+            const scrollPosition = wrapTop - 120;
+            window.scrollTo({
+                top: scrollPosition,
+                behavior: 'smooth'
+            });
+        }
     }
 
     renderAssessmentView() {
