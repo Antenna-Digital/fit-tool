@@ -43,7 +43,13 @@ class CompassTeaserAssessment {
             message: message,
             type: type
         };
-        this.render();
+        
+        // If we're on the results page, manually add the notification without re-rendering
+        if (this.showResults) {
+            this.addNotificationToDOM();
+        } else {
+            this.render();
+        }
         
         // Auto-hide after 5 seconds
         setTimeout(() => {
@@ -53,7 +59,36 @@ class CompassTeaserAssessment {
 
     hideNotification() {
         this.notification.show = false;
-        this.render();
+        
+        // If we're on the results page, manually remove the notification without re-rendering
+        if (this.showResults) {
+            const notificationElement = document.querySelector('.ct_notification');
+            if (notificationElement) {
+                notificationElement.remove();
+            }
+        } else {
+            this.render();
+        }
+    }
+    
+    addNotificationToDOM() {
+        // Remove any existing notification first
+        const existingNotification = document.querySelector('.ct_notification');
+        if (existingNotification) {
+            existingNotification.remove();
+        }
+        
+        // Create and add the new notification
+        const appElement = document.getElementById('app');
+        if (appElement && this.notification.show) {
+            const notificationHTML = this.renderNotification();
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = notificationHTML;
+            const notificationElement = tempDiv.firstElementChild;
+            if (notificationElement) {
+                appElement.appendChild(notificationElement);
+            }
+        }
     }
 
     calculateScore() {
@@ -183,9 +218,6 @@ class CompassTeaserAssessment {
         setTimeout(() => {
             this.animateScore(this.calculatedScore);
         }, 300);
-        
-        // Send assessment results to Smartsheet via webhook
-        await this.sendAssessmentToSmartsheet();
     }
     
     async sendAssessmentToSmartsheet() {
@@ -285,7 +317,27 @@ class CompassTeaserAssessment {
                 this.showNotification('Thank you! We will be in touch soon.', 'success');
                 this.contactData = { name: '', email: '', company: '', message: '' };
                 this.showContactForm = false;
-                this.render();
+                
+                // Update the contact form visibility without re-rendering the entire page
+                const contactForm = document.querySelector('.ct_contact-form');
+                const button = document.querySelector('.button_main_wrap.ct_active');
+                if (contactForm) {
+                    contactForm.classList.remove('ct_visible');
+                }
+                if (button) {
+                    button.classList.remove('ct_active');
+                }
+                
+                // Scroll to top of conscious-compass-teaser_wrap element + 120px
+                const wrapElement = document.querySelector('.conscious-compass-teaser_wrap');
+                if (wrapElement) {
+                    const wrapTop = wrapElement.getBoundingClientRect().top + window.pageYOffset;
+                    const scrollPosition = wrapTop - 120;
+                    window.scrollTo({
+                        top: scrollPosition,
+                        behavior: 'smooth'
+                    });
+                }
             } else {
                 // Check console for details
                 console.error('Webhook returned non-success response. Check console logs above for details.');
@@ -597,7 +649,7 @@ class CompassTeaserAssessment {
                 <div class="ct_form-group">
                     <label class="u-text-style-small">What does success look like for your agency relationship?</label>
                     <textarea oninput="app.handleContactChange('message', this.value)" 
-                        placeholder="What does success look like for your agency relationship?">${this.contactData.message}</textarea>
+                        placeholder="Tell us a little more about your goals and ambitions for your brand in the year ahead.">${this.contactData.message}</textarea>
                 </div>
                 <div class="u-button-group">
                     <div data-wf--button-main--style="primary" class="button_main_wrap">

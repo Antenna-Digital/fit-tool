@@ -492,7 +492,7 @@ class ArchetypeAssessment {
                                 rows="2"
                                 class="fit_form-input"
                                 data-field="brandIssue"
-                                placeholder="What does success look like for your agency relationship?"
+                                placeholder="Tell us a little more about your goals and ambitions for your brand in the year ahead."
                                 oninput="app.handleInputChange('brandIssue', this.value)"
                             >${this.formData.brandIssue}</textarea>
                         </div>
