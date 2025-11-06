@@ -111,19 +111,8 @@
 }
 
 .ct_slider-container {
-    margin-bottom: var(--_spacing---space--5);
+    margin-bottom: 80px;
     position: relative;
-}
-
-.ct_radio-track {
-    position: absolute;
-    top: 12px;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: var(--swatch--dark-900);
-    border-radius: 2px;
-    z-index: 0;
 }
 
 .ct_radio-options {
@@ -131,6 +120,10 @@
     justify-content: space-between;
     position: relative;
     z-index: 1;
+    align-items: center;
+    padding: 8px 12px;
+    background: hsl(40deg 15.79% 96.27% / 90%);
+    border-radius: 100px;
 }
 
 .ct_radio-option {
@@ -138,17 +131,16 @@
     flex-direction: column;
     align-items: center;
     cursor: pointer;
-    flex: 1;
+    /* flex: 1; */
+    position: relative;
 }
 
 .ct_radio-option:first-child {
-    align-items: flex-start;
-    flex: 0.8;
+    /* align-items: flex-start; */
+    /* flex: 0.8; */
 }
 
 .ct_radio-option:last-child {
-    align-items: flex-end;
-    flex: 0.8;
 }
 
 .ct_radio-option input[type="radio"] {
@@ -156,43 +148,66 @@
 }
 
 .ct_radio-dot {
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
     background: transparent;
+    border: 2px solid var(--swatch--dark-900);
     transition: all 0.2s ease;
-    margin-bottom: var(--_spacing---space--3);
+    position: relative;
 }
 
 .ct_radio-dot.ct_active {
-    background: var(--swatch--dark-900);
+    background: transparent;
+    border: 2px solid var(--swatch--tertiary);
 }
 
-.ct_radio-option:hover .ct_radio-dot {
-    transform: scale(1.15);
-    box-shadow: 0 0 0 8px rgba(0, 0, 0, 0.08);
-}
-
-.ct_radio-option:hover .ct_radio-dot.ct_active {
+.ct_radio-dot.ct_active::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
     background: var(--swatch--tertiary);
 }
 
+.ct_radio-option:hover .ct_radio-dot {
+    transform: scale(1.05);
+}
+
+.ct_radio-option:hover .ct_radio-dot.ct_active {
+    background: transparent;
+    border-color: var(--swatch--tertiary);
+}
+
 .ct_radio-label {
-    color: var(--swatch--gray-80);
+    color: var(--swatch--dark-900);
     transition: all 0.2s ease;
     text-align: center;
     word-spacing: 100vw;
     font-size: .75rem;
     font-weight: 500;
     height: 50px;
+    position: absolute;
+    bottom: -70px;
 }
-
-.ct_radio-option:first-child .ct_radio-label {
+.ct_radio-option:nth-of-type(1) .ct_radio-label,
+.ct_radio-option:nth-of-type(2) .ct_radio-label {
     text-align: left;
+    left: 0;
 }
-
-.ct_radio-option:last-child .ct_radio-label {
+.ct_radio-option:nth-of-type(3) .ct_radio-label {
+    text-align: center;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.ct_radio-option:nth-of-type(4) .ct_radio-label,
+.ct_radio-option:nth-of-type(6) .ct_radio-label {
     text-align: right;
+    right: 0;
 }
 
 .ct_radio-label.ct_active {
