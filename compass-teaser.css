@@ -46,7 +46,7 @@
 .ct_intro-text_attr_list {
     display: flex;
     flex-direction: column;
-    gap: var(--_spacing---space--4);
+    gap: var(--_spacing---space--5);
 }
 
 /* ========================================
@@ -189,7 +189,7 @@
     text-align: center;
     word-spacing: 100vw;
     font-size: .75rem;
-    font-weight: 500;
+    font-weight: 400;
     height: 50px;
     position: absolute;
     bottom: -70px;
@@ -298,6 +298,7 @@
 
 .ct_score-label {
     color: var(--swatch--dark-900);
+    margin-bottom: var(--_spacing---space--5);
 }
 
 .ct_score-description {
@@ -321,7 +322,6 @@
 }
 
 .ct_cta-intro {
-    background: var(--swatch--light-100);
     border-radius: 0;
 }
 
@@ -436,8 +436,6 @@ margin-bottom: 0;
 
 /* Contact Form */
 .ct_contact-form {
-    background: white;
-    padding: var(--_spacing---space--7);
     border-radius: 0;
     max-height: 0;
     overflow: hidden;
@@ -446,9 +444,9 @@ margin-bottom: 0;
 }
 
 .ct_contact-form.ct_visible {
-    max-height: 800px;
+    max-height: 1200px;
+    margin-top: var(--_spacing---space--7);
     opacity: 1;
-    padding: var(--_spacing---space--7);
 }
 
 .ct_contact-form h3 {
@@ -472,8 +470,8 @@ margin-bottom: 0;
 .ct_form-group textarea {
     width: 100%;
     padding: var(--_spacing---space--3) var(--_spacing---space--4);
-    border: 2px solid var(--swatch--muse);
-    background: var(--swatch--light-100);
+    border: 2px solid transparent;
+    background: white;
     transition: border-color 0.2s ease;
 }
 

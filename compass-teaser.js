@@ -22,6 +22,7 @@ class CompassTeaserAssessment {
             name: '',
             email: '',
             company: '',
+            role: '',
             message: ''
         };
         
@@ -315,7 +316,7 @@ class CompassTeaserAssessment {
             
             if (success) {
                 this.showNotification('Thank you! We will be in touch soon.', 'success');
-                this.contactData = { name: '', email: '', company: '', message: '' };
+                this.contactData = { name: '', email: '', company: '', message: '', role: '' };
                 this.showContactForm = false;
                 
                 // Update the contact form visibility without re-rendering the entire page
@@ -359,7 +360,7 @@ class CompassTeaserAssessment {
         
         this.showResults = false;
         this.showContactForm = false;
-        this.contactData = { name: '', email: '', company: '', message: '' };
+        this.contactData = { name: '', email: '', company: '', message: '', role: '' };
         
         this.render();
         
@@ -528,7 +529,7 @@ class CompassTeaserAssessment {
                     <div class="ct_score-description u-text-style-main">${description}</div>
                     <div data-wf--button-main--style="primary" class="button_main_wrap">
                         <div class="clickable_wrap u-cover-absolute">
-                            <button type="button" class="clickable_btn" onclick="app.handleTryAgain(event)">
+                            <button type="button" class="clickable_btn" style="display: block;" onclick="app.handleTryAgain(event)">
                                 <span class="clickable_text u-sr-only">Try Again</span>
                             </button>
                         </div>
@@ -620,9 +621,10 @@ class CompassTeaserAssessment {
                                         </div>
                                     </div>
                                 </div>
+                                ${this.renderContactForm()}
                             </div>
                             
-                            ${this.renderContactForm()}
+                            
                         </div>
                     </div>
                 </div>
@@ -634,22 +636,28 @@ class CompassTeaserAssessment {
         return `
             <div class="ct_contact-form ${this.showContactForm ? 'ct_visible' : ''}">
                 <div class="ct_form-group">
-                    <label class="u-text-style-small">Name</label>
+                    <label class="u-text-style-small">Name*</label>
                     <input type="text" value="${this.contactData.name}" 
                         oninput="app.handleContactChange('name', this.value)" 
                         placeholder="Your name" required>
                 </div>
                 <div class="ct_form-group">
-                    <label class="u-text-style-small">Email</label>
-                    <input type="email" value="${this.contactData.email}" 
-                        oninput="app.handleContactChange('email', this.value)" 
-                        placeholder="your@email.com" required>
-                </div>
-                <div class="ct_form-group">
-                    <label class="u-text-style-small">Company</label>
+                    <label class="u-text-style-small">Organization</label>
                     <input type="text" value="${this.contactData.company}" 
                         oninput="app.handleContactChange('company', this.value)" 
                         placeholder="Your company" required>
+                </div>
+                <div class="ct_form-group">
+                    <label class="u-text-style-small">Role*</label>
+                    <input type="text" value="${this.contactData.role}" 
+                        oninput="app.handleContactChange('role', this.value)" 
+                        placeholder="Your role" required>
+                </div>
+                <div class="ct_form-group">
+                    <label class="u-text-style-small">Email*</label>
+                    <input type="email" value="${this.contactData.email}" 
+                        oninput="app.handleContactChange('email', this.value)" 
+                        placeholder="your@email.com" required>
                 </div>
                 <div class="ct_form-group">
                     <label class="u-text-style-small">What does success look like for your agency relationship?</label>
@@ -660,7 +668,7 @@ class CompassTeaserAssessment {
                     <div data-wf--button-main--style="primary" class="button_main_wrap">
                         <div class="clickable_wrap u-cover-absolute">
                             <button type="button" class="clickable_btn" style="display: block;" onclick="app.handleContactSubmit(event)">
-                                <span class="clickable_text u-sr-only">Submit</span>
+                                <span class="clickable_text u-sr-only">START SELF ASSESSMENT</span>
                             </button>
                         </div>
                         <div class="button_main_bg u-cover-absolute"></div>
@@ -668,9 +676,9 @@ class CompassTeaserAssessment {
                             <div class="u-display-contents"></div>
                         </div>
                         <div class="button_main_text_wrap">
-                            <div aria-hidden="true" class="button_main_text u-text-style-h6 is-placeholder-text">Submit</div>
-                            <div aria-hidden="true" class="button_main_text u-text-style-h6 is-default-text">Submit</div>
-                            <div aria-hidden="true" class="button_main_text u-text-style-h6 is-hover-text">Submit</div>
+                            <div aria-hidden="true" class="button_main_text u-text-style-h6 is-placeholder-text">START SELF ASSESSMENT</div>
+                            <div aria-hidden="true" class="button_main_text u-text-style-h6 is-default-text">START SELF ASSESSMENT</div>
+                            <div aria-hidden="true" class="button_main_text u-text-style-h6 is-hover-text">START SELF ASSESSMENT</div>
                         </div>
                         <div class="button_main_icon_wrap is-arrow">
                             <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 18 19" fill="none" class="u-svg">
