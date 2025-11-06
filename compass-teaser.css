@@ -445,7 +445,7 @@ margin-bottom: 0;
 
 .ct_contact-form.ct_visible {
     max-height: 1200px;
-    margin-top: var(--_spacing---space--7);
+    margin-top: var(--_spacing---space--8);
     opacity: 1;
 }
 
@@ -456,12 +456,15 @@ margin-bottom: 0;
 
 .ct_form-group {
     margin-bottom: var(--_spacing---space--5);
+    padding-top: 4px;
 }
 
 .ct_form-group label {
     display: block;
-    font-size: var(--_typography---font-size--label); /* 13px */
-    font-weight: 500;
+    font-size: var(--_typography---font-size--text-main);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
     color: var(--swatch--gray-100);
     margin-bottom: var(--_spacing---space--2);
 }

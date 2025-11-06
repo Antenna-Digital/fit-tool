@@ -56,23 +56,25 @@
 }
 
 .fit_form-group {
-    margin-bottom: var(--_spacing---space--4);
+    margin-bottom: var(--_spacing---space--5);
 }
 
 .fit_form-label {
     display: block;
-    font-size: var(--_typography---font-size--label); /* 13px */
-    font-weight: 500;
+    font-size: var(--_typography---font-size--text-main);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
     color: var(--swatch--gray-100);
     margin-bottom: var(--_spacing---space--2);
 }
 
 .fit_form-input {
     width: 100%;
-    padding: var(--_spacing---space--2) var(--_spacing---space--3);
-    border: var(--border-width--main) solid var(--swatch--gray-20);
-    background-color: var(--swatch--light-100);
-    transition: border-color 0.2s;
+    padding: var(--_spacing---space--3) var(--_spacing---space--4);
+    border: 2px solid transparent;
+    background: white;
+    transition: border-color 0.2s ease;
 }
 
 .fit_form-input:focus {
@@ -436,15 +438,17 @@
 }
 
 .fit_archetype-box {
-    border-left: 4px solid var(--swatch--dark-900);
-    padding: var(--_spacing---space--5);
+    max-width: 700px;
+    width: 100%;
     margin-bottom: var(--_spacing---space--6);
-    background-color: var(--swatch--light-200);
 }
 
 .fit_archetype-subtitle {
-    margin-bottom: var(--_spacing---space--5);
+    color: var(--swatch--dark-900);
+    text-transform: uppercase;
+    display: inline-block;
     font-weight: var(--_typography---font--primary-medium);
+    margin-bottom: var(--_spacing---space--5);
 }
 
 .fit_archetype-title {
@@ -458,13 +462,10 @@
 
 .fit_results-buttons {
     display: flex;
-    gap: var(--_spacing---space--3);
+    gap: var(--_spacing---space--5);
     margin-bottom: var(--_spacing---space--5);
 }
 
-.fit_results-buttons > * {
-    flex: 1;
-}
 
 .fit_button-link {
     text-decoration: none;

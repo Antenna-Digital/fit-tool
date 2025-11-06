@@ -443,7 +443,7 @@ class ArchetypeAssessment {
 
                     <div style="max-width: 40rem; margin-bottom: 2rem;">
                         <div class="fit_form-group"${gsapAttr}>
-                            <label class="fit_form-label u-text-style-small">Name</label>
+                            <label class="fit_form-label u-text-style-small">Name*</label>
                             <input
                                 type="text"
                                 class="fit_form-input"
@@ -454,7 +454,7 @@ class ArchetypeAssessment {
                             />
                         </div>
                         <div class="fit_form-group"${gsapAttr}>
-                            <label class="fit_form-label u-text-style-small">Organization</label>
+                            <label class="fit_form-label u-text-style-small">Organization*</label>
                             <input
                                 type="text"
                                 class="fit_form-input"
@@ -465,7 +465,7 @@ class ArchetypeAssessment {
                             />
                         </div>
                         <div class="fit_form-group"${gsapAttr}>
-                            <label class="fit_form-label u-text-style-small">Role</label>
+                            <label class="fit_form-label u-text-style-small">Role*</label>
                             <input
                                 type="text"
                                 class="fit_form-input"
@@ -476,7 +476,7 @@ class ArchetypeAssessment {
                             />
                         </div>
                         <div class="fit_form-group"${gsapAttr}>
-                            <label class="fit_form-label u-text-style-small">Email</label>
+                            <label class="fit_form-label u-text-style-small">Email*</label>
                             <input
                                 type="email"
                                 class="fit_form-input"
@@ -504,14 +504,29 @@ class ArchetypeAssessment {
                         </div>
                     ` : ''}
 
-                    <button
-                        onclick="app.handleStartAssessment()"
-                        class="fit_button-swipe"
-                        ${gsapAttr}
-                    >
-                        <span>START SELF-ASSESSMENT</span>
-                        <span>${ChevronRight}</span>
-                    </button>
+                    <div class="u-button-group">
+                        <div data-wf--button-main--style="primary" class="button_main_wrap">
+                            <div class="clickable_wrap u-cover-absolute">
+                                <button type="button" class="clickable_btn" style="display: block;" onclick="app.handleStartAssessment(event)">
+                                    <span class="clickable_text u-sr-only">START SELF ASSESSMENT</span>
+                                </button>
+                            </div>
+                            <div class="button_main_bg u-cover-absolute"></div>
+                            <div class="button_main_icon_wrap is-optional">
+                                <div class="u-display-contents"></div>
+                            </div>
+                            <div class="button_main_text_wrap">
+                                <div aria-hidden="true" class="button_main_text u-text-style-h6 is-placeholder-text">START SELF ASSESSMENT</div>
+                                <div aria-hidden="true" class="button_main_text u-text-style-h6 is-default-text">START SELF ASSESSMENT</div>
+                                <div aria-hidden="true" class="button_main_text u-text-style-h6 is-hover-text">START SELF ASSESSMENT</div>
+                            </div>
+                            <div class="button_main_icon_wrap is-arrow">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 18 19" fill="none" class="u-svg">
+                                    <path d="M13.7231 3.24951L2.28467 3.24951L2.28467 1.09033L17.4106 1.09033L17.4106 16.2163L15.2515 16.2163L15.2515 4.77588L1.93701 18.0894L0.410644 16.563L13.7231 3.24951Z" fill="currentColor"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         `;
@@ -590,7 +605,7 @@ return `
 <p style="font-size: 1rem; font-weight: 700; color: black; margin-bottom: 0.5rem;">
 <span class="fit_highlight"${gsapAttr}>Your results</span>
 </p>
-<h1 class="fit_title-large u-text-style-h2"${gsapAttr}>Welcome to your<br /><strong>partnership</strong> <strong>profile</strong></h1>
+<h2 class="fit_title-large u-text-style-h2"${gsapAttr}>Welcome to your<br />partnership profile</h2>
 <p class="fit_text-small u-text-style-main"${gsapAttr}>
 Thank you for sharing what you value most in an agency relationship.
 </p>
@@ -663,25 +678,52 @@ Below is a summary of what we have learnt.
                         <p class="fit_archetype-description u-text-style-main">${archetypeInfo.description}</p>
                     </div>
 
-                    <div class="fit_results-buttons">
-                        <a
-                            href="https://antennagroup.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="fit_button-swipe fit_button-link"
-                            ${gsapAttr}
-                        >
-                            <span>Visit Antenna Group</span>
-                        </a>
-                        
-                        <button
-                            onclick="app.handleReset()"
-                            class="fit_button-swipe"
-                            ${gsapAttr}
-                            style="color: #374151; border-color: #9CA3AF;"
-                        >
-                            <span>Try Again</span>
-                        </button>
+
+                     <div class="fit_results-buttons u-button-group">
+                        <div data-wf--button-main--style="primary" class="button_main_wrap">
+                            <div class="clickable_wrap u-cover-absolute">
+                                <a target="" href="https://antennagroup.com" class="clickable_link w-inline-block"><span class="clickable_text u-sr-only">Visit Antenna Group</span></a>
+                                <button type="button" class="clickable_btn" onclick="app.handleStartAssessment(event)">
+                                    <span class="clickable_text u-sr-only">Visit Antenna Group</span>
+                                </button>
+                            </div>
+                            <div class="button_main_bg u-cover-absolute"></div>
+                            <div class="button_main_icon_wrap is-optional">
+                                <div class="u-display-contents"></div>
+                            </div>
+                            <div class="button_main_text_wrap">
+                                <div aria-hidden="true" class="button_main_text u-text-style-h6 is-placeholder-text">Visit Antenna Group</div>
+                                <div aria-hidden="true" class="button_main_text u-text-style-h6 is-default-text">Visit Antenna Group</div>
+                                <div aria-hidden="true" class="button_main_text u-text-style-h6 is-hover-text">Visit Antenna Group</div>
+                            </div>
+                            <div class="button_main_icon_wrap is-arrow">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 18 19" fill="none" class="u-svg">
+                                    <path d="M13.7231 3.24951L2.28467 3.24951L2.28467 1.09033L17.4106 1.09033L17.4106 16.2163L15.2515 16.2163L15.2515 4.77588L1.93701 18.0894L0.410644 16.563L13.7231 3.24951Z" fill="currentColor"></path>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div data-wf--button-main--style="primary" class="button_main_wrap">
+                            <div class="clickable_wrap u-cover-absolute">
+                                <button type="button" class="clickable_btn" style="display: block;" onclick="app.handleReset()">
+                                    <span class="clickable_text u-sr-only">Try Again</span>
+                                </button>
+                            </div>
+                            <div class="button_main_bg u-cover-absolute"></div>
+                            <div class="button_main_icon_wrap is-optional">
+                                <div class="u-display-contents"></div>
+                            </div>
+                            <div class="button_main_text_wrap">
+                                <div aria-hidden="true" class="button_main_text u-text-style-h6 is-placeholder-text">Try Again</div>
+                                <div aria-hidden="true" class="button_main_text u-text-style-h6 is-default-text">Try Again</div>
+                                <div aria-hidden="true" class="button_main_text u-text-style-h6 is-hover-text">Try Again</div>
+                            </div>
+                            <div class="button_main_icon_wrap is-arrow">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 18 19" fill="none" class="u-svg">
+                                    <path d="M13.7231 3.24951L2.28467 3.24951L2.28467 1.09033L17.4106 1.09033L17.4106 16.2163L15.2515 16.2163L15.2515 4.77588L1.93701 18.0894L0.410644 16.563L13.7231 3.24951Z" fill="currentColor"></path>
+                                </svg>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

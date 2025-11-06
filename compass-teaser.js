@@ -642,7 +642,7 @@ class CompassTeaserAssessment {
                         placeholder="Your name" required>
                 </div>
                 <div class="ct_form-group">
-                    <label class="u-text-style-small">Organization</label>
+                    <label class="u-text-style-small">Organization*</label>
                     <input type="text" value="${this.contactData.company}" 
                         oninput="app.handleContactChange('company', this.value)" 
                         placeholder="Your company" required>
